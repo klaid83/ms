@@ -154,4 +154,59 @@ class IndexController extends AbstractActionController
 	}
 
 
+	public function ManyToManyInsertAction()
+	{
+		// Select
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		// persisting
+		$plumber = new \Mod1\Entity\User3();
+		$plumber->setName('Plumber Builder');
+
+		$plaster = new \Mod1\Entity\User3();
+		$plaster->setName('Plaster Builder');
+
+		$categoryPlumber = new \Mod1\Entity\Category3();
+		$categoryPlumber->setName('Plumber Category');
+		$categoryBeer_Drinkers = new \Mod1\Entity\Category3();
+		$categoryBeer_Drinkers->setName('Beer_Drinkers Category');
+
+		$categoryPlumber->getUsers()->add($plumber);
+		$categoryBeer_Drinkers->getUsers()->add($plaster);
+		$categoryBeer_Drinkers->getUsers()->add($plumber);
+
+		$plumber->getCategories()->add($categoryPlumber);
+		$plumber->getCategories()->add($categoryBeer_Drinkers);
+		$plaster->getCategories()->add($categoryBeer_Drinkers);
+
+		$em->persist($plumber);
+		$em->persist($plaster);
+		$em->flush();
+
+		die;
+	}
+
+	public function ManyToManySelectAction()
+	{
+		// Select
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		//retrieving
+		$plumber = $em->find('Mod1\Entity\User3', 1);
+		//get last categories for plumber
+		$plumber->getCategories()->toArray();
+		//get last category(Beer_Drinkers Category) and all users for this category
+		$somes = $plumber->getCategories()->last()->getUsers()->toArray();
+
+
+		foreach($somes as $some)
+		{
+			\Zend\Debug\Debug::dump($some->getName());
+		}
+
+		die;
+	}
+
 }
