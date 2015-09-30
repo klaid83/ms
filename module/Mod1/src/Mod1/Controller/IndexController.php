@@ -31,6 +31,39 @@ class IndexController extends AbstractActionController
 		$view->setTerminal(true);
 		$view->setTemplate('mod1/test_template');
 //		$this->getResponse()->setStatusCode(404);
-//		return $view;
+		return $view;
 	}
+
+	public function OneToOneInsertAction()
+	{
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+		// Insert
+		$user = new \Mod1\Entity\User();
+		$user->setName('name');
+
+		$comment = new \Mod1\Entity\Comment();
+		$comment->setMessage('street23');
+
+		$comment->setUser($user);
+		$user->setComment($comment);
+
+		$em->persist($user);
+		$em->flush();
+		die;
+	}
+
+	public function OneToOneSelectAction()
+	{
+		// Select
+		$user = $this->getServiceLocator()
+			->get('Doctrine\ORM\EntityManager')
+			->getRepository('Mod1\Entity\User')
+			->findOneById(2);
+		\Zend\Debug\Debug::dump($user->getName());
+		\Zend\Debug\Debug::dump($user->getComment()->getMessage());
+		die;
+	}
+
+
 }
