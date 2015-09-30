@@ -13,7 +13,7 @@ class IndexController extends AbstractActionController
 	    $testService = $this->getServiceLocator()->get('TestService');
 
 
-	    return $this->page404();
+//	    return $this->page404();
 
 
 //	    \Zend\Debug\Debug::dump($testService->getVar1());
