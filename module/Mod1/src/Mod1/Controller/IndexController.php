@@ -111,5 +111,47 @@ class IndexController extends AbstractActionController
 		die;
 	}
 
+	public function OneToManySelfRefInsertAction()
+	{
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		// Insert
+		$comment2 = new \Mod1\Entity\Comment2();
+		$comment2->setMessage('parent');
+
+		$comment1 = new \Mod1\Entity\Comment2();
+		$comment1->setMessage('children1');
+		$comment1->setParent($comment2);
+		$comment3 = new \Mod1\Entity\Comment2();
+		$comment3->setMessage('children2');
+		$comment3->setParent($comment2);
+
+		$comment2->getChildren()->add($comment1);
+		$comment2->getChildren()->add($comment3);
+
+		$em->persist($comment2);
+		$em->flush();
+
+		die;
+	}
+
+
+	public function OneToManySelfRefSelectAction()
+	{
+		// Select
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		//retrieving
+		$comment = $em->find('Mod1\Entity\Comment2', 1);
+		foreach($comment->getChildren()->toArray() as $children)
+		{
+			\Zend\Debug\Debug::dump($children->getMessage());
+		}
+
+		die;
+	}
+
 
 }
