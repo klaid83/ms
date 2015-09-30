@@ -12,6 +12,16 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+
+	    $app = $e->getApplication();
+	    // get the shared events manager
+	    $sem = $app->getEventManager()->getSharedManager();
+	    // listen to 'MyEvent' when triggered by the IndexController
+	    // регистрируем слушателя на событие MyEvent
+	    $sem->attach('Mod1\Controller\IndexController', 'MyEvent', function($e) {
+		    \Zend\Debug\Debug::dump('MyEvent');
+	    });
     }
 
     public function getConfig()

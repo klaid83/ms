@@ -15,6 +15,9 @@ class IndexController extends AbstractActionController
 //	    \Zend\Debug\Debug::dump($testService->getVar1());
 //	    \Zend\Debug\Debug::dump($testService->getVar2());
 
+	    // создаем событие MyEvent
+	    $this->getEventManager()->trigger('MyEvent', $this);
+
         return new ViewModel(array('vars' => $testService->getVars()));
     }
 }
