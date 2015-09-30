@@ -12,6 +12,10 @@ class IndexController extends AbstractActionController
 	    /** @var \Mod1\Service\TestService $testService */
 	    $testService = $this->getServiceLocator()->get('TestService');
 
+
+	    return $this->page404();
+
+
 //	    \Zend\Debug\Debug::dump($testService->getVar1());
 //	    \Zend\Debug\Debug::dump($testService->getVar2());
 
@@ -20,4 +24,13 @@ class IndexController extends AbstractActionController
 
         return new ViewModel(array('vars' => $testService->getVars()));
     }
+
+	public function page404()
+	{
+		$view = new ViewModel();
+		$view->setTerminal(true);
+		$view->setTemplate('mod1/test_template');
+//		$this->getResponse()->setStatusCode(404);
+//		return $view;
+	}
 }
