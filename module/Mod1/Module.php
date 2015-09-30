@@ -29,4 +29,15 @@ class Module
             ),
         );
     }
+
+	public function getServiceConfig()
+	{
+		return array (
+			'factories' => array (
+				'TestService' => 'Mod1\Factories\TestServiceFactory',
+			),
+			'abstract_factories' => array (
+			),
+		);
+	}
 }
