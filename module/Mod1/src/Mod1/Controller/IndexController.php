@@ -65,5 +65,51 @@ class IndexController extends AbstractActionController
 		die;
 	}
 
+	public function OneToManyInsertAction()
+	{
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		// Insert
+		$user = new \Mod1\Entity\User1();
+		$user->setName('name1');
+
+		$comment1 = new \Mod1\Entity\Comment1();
+		$comment1->setMessage('comment3');
+		$comment1->setUser($user);
+		$comment2 = new \Mod1\Entity\Comment1();
+		$comment2->setMessage('comment4');
+		$comment2->setUser($user);
+
+		$user->getComments()->add($comment2);
+		$user->getComments()->add($comment1);
+
+		$em->persist($user);
+		$em->flush();
+		die;
+	}
+
+
+	public function OneToManySelectAction()
+	{
+		// Select
+//		$em = $this->getServiceLocator()
+//			->get('doctrine.entitymanager.orm_default');
+//		$user = $em->find('Mod1\Entity\User1', 2);
+//		$user->getComments()->toArray();
+
+		$user = $this->getServiceLocator()
+			->get('Doctrine\ORM\EntityManager')
+			->getRepository('Mod1\Entity\User1')
+			->findOneById(2);
+
+		\Zend\Debug\Debug::dump($user->getName());
+		foreach($user->getComments()->toArray() as $comment)
+		{
+			\Zend\Debug\Debug::dump($comment->getMessage());
+		}
+		die;
+	}
+
 
 }
