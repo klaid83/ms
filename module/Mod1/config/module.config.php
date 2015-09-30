@@ -71,4 +71,20 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+
+	'doctrine' => array(
+		'driver' => array(
+			'mod1_entities' => array(
+				'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+				'cache' => 'array',
+				'paths' => array(__DIR__ . '/../src/Mod1/Entity')
+			),
+
+			'orm_default' => array(
+				'drivers' => array(
+					'Mod1\Entity' => 'mod1_entities'
+				)
+			)
+		)
+	),
 );

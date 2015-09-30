@@ -1,0 +1,4 @@
+./vendor/bin/doctrine-module orm:info
+./vendor/bin/doctrine-module orm:validate-schema
+./vendor/bin/doctrine-module orm:schema-tool:create
+./vendor/bin/doctrine-module orm:schema-tool:update --force
