@@ -9,12 +9,12 @@ return array(
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
-            'mod2' => array(
+            'mod1' => array(
                 'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/mod2',
+                    'route'    => '/mod1',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Mod2\Controller',
+                        '__NAMESPACE__' => 'Mod1\Controller',
                         'controller'    => 'Index',
                         'action'        => 'index',
                     ),
@@ -58,10 +58,15 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Mod2\Controller\Index' => 'Mod2\Controller\IndexController'
+            'Mod1\Controller\Index' => 'Mod1\Controller\IndexController'
         ),
     ),
     'view_manager' => array(
+	    'template_map' => array(
+		    'mod1/test_template'          => __DIR__ . '/../view/test/test_template.phtml',
+		    'mod1/test_template1'          => __DIR__ . '/../view/test/test_template1.phtml',
+		    'mod1/test_template2'          => __DIR__ . '/../view/test/test_template2.phtml',
+	    ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
