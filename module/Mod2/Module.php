@@ -4,9 +4,24 @@ namespace Mod2;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\ModuleManager;
 
 class Module
 {
+	//module.php
+	public function init(ModuleManager $moduleManager){
+		$sharedEvents = $moduleManager->getEventManager()->getSharedManager();
+		$sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
+			$controller = $e->getTarget();
+			$controller->layout('layout/new_layout');
+
+			// или делать проверку на контроллер или еще чё-нить
+//			if ($controller instanceof Controller\FrontEndController) {
+//				$controller->layout('layout/new_layout');
+//			}
+		}, 100);
+	}
+
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
