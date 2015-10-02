@@ -66,6 +66,7 @@ return array(
 		    'mod2/test_template'          => __DIR__ . '/../view/test/test_template.phtml',
 		    'mod2/test_template1'          => __DIR__ . '/../view/test/test_template1.phtml',
 		    'mod2/test_template2'          => __DIR__ . '/../view/test/test_template2.phtml',
+		    'layout/new_layout'            => __DIR__ . '/../view/layout/layout.phtml',
 	    ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
