@@ -120,5 +120,10 @@ class IndexController extends AbstractActionController
 		return $jsonModel;
 	}
 
-
+	public function view1Action()
+	{
+		$view = new ViewModel();
+		$view->setTerminal(true);
+		return $view;
+	}
 }
