@@ -2,12 +2,11 @@
 
 namespace Mod2\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Form\Annotation\AnnotationBuilder;
 use Zend\View\Model\JsonModel;
 
-class IndexController extends AbstractActionController
+class IndexController extends AbstractController
 {
     public function indexAction()
     {
@@ -129,26 +128,7 @@ class IndexController extends AbstractActionController
 
 	public function view2Action()
 	{
-		$this->page403();
+		$this->page404();
 	}
 
-	public function page404()
-	{
-		$response = $this->getResponse();
-		$response->setStatusCode(404);
-
-		$this->getEvent()->getViewModel()->setTemplate('mod2/404');
-		$this->getEvent()->setResponse($response);
-		return $this->getEvent()->getViewModel();
-	}
-
-	public function page403()
-	{
-		$response = $this->getResponse();
-		$response->setStatusCode(403);
-
-		$this->getEvent()->getViewModel()->setTemplate('mod2/403');
-		$this->getEvent()->setResponse($response);
-		return $this->getEvent()->getViewModel();
-	}
 }
