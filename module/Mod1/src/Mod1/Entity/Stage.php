@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="stages")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"selection" = "StageSelection", "common" = "Stage"})
+ * @ORM\DiscriminatorMap({"selection" = "StageSelection", "selection1" = "StageSelection1", "common" = "Stage"})
  */
 class Stage
 {
