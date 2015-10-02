@@ -5,6 +5,7 @@ namespace Mod2\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Form\Annotation\AnnotationBuilder;
+use Zend\View\Model\JsonModel;
 
 class IndexController extends AbstractActionController
 {
@@ -98,6 +99,13 @@ class IndexController extends AbstractActionController
 //		$response->setStatusCode(500);
 //		$response->setStatusCode(502);
 		return $response;
+	}
+
+	public function jsonAction()
+	{
+		$view = new JsonModel(
+			array('success' => '1','data'=>'foo'));
+		return $view;
 	}
 
 
