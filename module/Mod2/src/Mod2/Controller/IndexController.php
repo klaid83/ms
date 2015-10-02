@@ -126,4 +126,11 @@ class IndexController extends AbstractActionController
 		$view->setTerminal(true);
 		return $view;
 	}
+
+	public function view2Action()
+	{
+
+	}
+
+
 }
