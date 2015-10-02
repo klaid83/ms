@@ -209,4 +209,36 @@ class IndexController extends AbstractActionController
 		die;
 	}
 
+	public function InheritanceInsertAction()
+	{
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		// persisting
+		$stage_selection = new \Mod1\Entity\StageSelection();
+		$stage_selection->setSpecialNumber('8888');
+		$stage_selection->setType('type');
+
+//		$stage_selection1 = new \Mod1\Entity\StageSelection1();
+//		$stage_selection1->setSpecialNumber('7777');
+//		$stage_selection1->setType('type1');
+
+		$em->persist($stage_selection);
+//		$em->persist($stage_selection1);
+		$em->flush();
+
+		die;
+	}
+
+	public function InheritanceSelectAction()
+	{
+
+//retrieving
+//		$plumber = $em->find('SoleTrader', $plumber->getId());
+//		$plumber->getAddress();
+		die;
+	}
+
+
+
 }
