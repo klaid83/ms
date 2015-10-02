@@ -232,10 +232,14 @@ class IndexController extends AbstractActionController
 
 	public function InheritanceSelectAction()
 	{
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
 
-//retrieving
-//		$plumber = $em->find('SoleTrader', $plumber->getId());
-//		$plumber->getAddress();
+		//retrieving
+		$stage_selection = $em->find('Mod1\Entity\StageSelection', 6);
+		$stage_selection1 = $em->find('Mod1\Entity\StageSelection1', 5);
+		\Zend\Debug\Debug::dump($stage_selection->getType());
+		\Zend\Debug\Debug::dump($stage_selection1);
 		die;
 	}
 
