@@ -69,6 +69,7 @@ return array(
 		    'mod2/404'                     => __DIR__ . '/../view/test/page404.phtml',
 		    'mod2/403'                     => __DIR__ . '/../view/test/page403.phtml',
 		    'layout/new_layout'            => __DIR__ . '/../view/layout/layout.phtml',
+		    'layout/app_layout'            => __DIR__ . '/../view/layout/layout_app.phtml',
 	    ),
         'template_path_stack' => array(
             __DIR__ . '/../view',

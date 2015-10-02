@@ -131,4 +131,8 @@ class IndexController extends AbstractController
 		$this->page404();
 	}
 
+	public function layoutAction()
+	{
+
+	}
 }
