@@ -88,4 +88,17 @@ class IndexController extends AbstractActionController
 
 		return $view;
 	}
+
+	public function setCodeAction()
+	{
+		$response = $this->getResponse();
+		$response->setStatusCode(404);
+//		$response->setStatusCode(200);
+//		$response->setStatusCode(303);
+//		$response->setStatusCode(500);
+//		$response->setStatusCode(502);
+		return $response;
+	}
+
+
 }
