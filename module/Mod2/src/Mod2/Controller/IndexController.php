@@ -81,6 +81,10 @@ class IndexController extends AbstractActionController
 		$view->setTemplate('mod2/test_template2');
 		$view->setVariables(array('var1' => 12, 'var2' => 34, 'var3' => 56));
 
+		$sideblockView = new ViewModel();
+		$sideblockView->setTemplate('mod2/test_template1');
+		$view->addChild($sideblockView, 'sideblock');
+
 		return $view;
 	}
 }
