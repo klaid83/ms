@@ -79,6 +79,7 @@ class IndexController extends AbstractActionController
 
 		$view = new ViewModel();
 		$view->setTemplate('mod2/test_template2');
+		$view->setVariables(array('var1' => 12, 'var2' => 34, 'var3' => 56));
 
 		return $view;
 	}
