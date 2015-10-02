@@ -1,0 +1,9 @@
+<?php
+
+$form = $this->form;
+//$form->setAttribute('action', $this->url('formTest', array('action' => 'annotation')))->prepare();
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('type'));
+echo $this->formRow($form->get('comment'));
+echo $this->formInput($form->get('submit'));
+echo $this->form()->closeTag($form);

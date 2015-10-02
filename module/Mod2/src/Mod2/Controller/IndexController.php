@@ -4,6 +4,7 @@ namespace Mod2\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Form\Annotation\AnnotationBuilder;
 
 class IndexController extends AbstractActionController
 {
@@ -38,6 +39,37 @@ class IndexController extends AbstractActionController
 			}
 		}
 
+		return array('form' => $form);
+	}
+
+
+	public function annotationSimpleAction()
+	{
+		// prepare data
+		$comment = new \Mod2\Entity\Comment1();
+		$comment->type = 2;
+		$comment->comment = 'Test annotation';
+
+		$builder = new AnnotationBuilder();
+		$form = $builder->createForm($comment);
+		$form->add(array(
+			'name' => 'submit',
+			'attributes' => array(
+				'type' => 'submit',
+				'value' => 'Go',
+				'id' => 'submitbutton',
+			),
+		));
+
+		$form->bind($comment);
+
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$form->setData($request->getPost());
+			if ($form->isValid()) {
+				var_dump($comment);
+			}
+		}
 		return array('form' => $form);
 	}
 }
