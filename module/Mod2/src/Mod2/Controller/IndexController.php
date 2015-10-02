@@ -103,9 +103,21 @@ class IndexController extends AbstractActionController
 
 	public function jsonAction()
 	{
-		$view = new JsonModel(
-			array('success' => '1','data'=>'foo'));
-		return $view;
+//		$view = new JsonModel(
+//			array('success' => '1','data'=>'foo'));
+//		return $view;
+
+		$jsonModel = new JsonModel();
+		$view = new ViewModel();
+		$view->setTemplate('mod2/test_template');
+
+		$jsonModel->setVariables(array(
+			'html' => $view,
+			'jsonVar1' => 'jsonVal2',
+			'jsonArray' => array(1,2,3,4,5,6)
+		));
+
+		return $jsonModel;
 	}
 
 
