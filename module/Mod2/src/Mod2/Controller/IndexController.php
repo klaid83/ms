@@ -83,6 +83,7 @@ class IndexController extends AbstractActionController
 
 		$sideblockView = new ViewModel();
 		$sideblockView->setTemplate('mod2/test_template1');
+		$sideblockView->setVariables(array('banner1' => 'foto_1', 'banner2' => 'foto_2', 'banner3' => 'foto_3'));
 		$view->addChild($sideblockView, 'sideblock');
 
 		return $view;
