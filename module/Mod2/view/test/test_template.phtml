@@ -1,1 +1,18 @@
-mod_2 test_template.phtml
+<div class="jumbotron">
+	Some Text
+</div>
+
+<div class="row">
+	<?php foreach($vars as $k=>$var): ?>
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Some <?php echo $k; ?></h3>
+				</div>
+				<div class="panel-body">
+					<p><?php echo sprintf($var) ?></p>
+				</div>
+			</div>
+		</div>
+	<?php endforeach; ?>
+</div>

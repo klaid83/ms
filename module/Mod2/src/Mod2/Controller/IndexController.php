@@ -133,6 +133,34 @@ class IndexController extends AbstractController
 
 	public function layoutAction()
 	{
+		$this->layout()->setTemplate('layout/app_layout');
 
+		$view = new ViewModel();
+		$sideView = new ViewModel(array('vars' => $this->getVars()));
+		$sideView->setTemplate('mod2/test_template');
+		$menuView = new ViewModel(array('menu' => $this->getMenu()));
+		$menuView->setTemplate('mod2/menu');
+
+
+		$this->layout()->addChild($sideView, 'side_view');
+		$this->layout()->addChild($menuView, 'menu_view');
+		return $view;
+	}
+
+	public function getVars()
+	{
+		$vars = array();
+		for($i = 1; $i < 50; $i++)
+		{
+			$var = 'var_';
+			$vars[$var . $i] = mktime(true);
+		}
+
+		return $vars;
+	}
+
+	public function getMenu()
+	{
+		return array('About', 'Contact', 'Material');
 	}
 }

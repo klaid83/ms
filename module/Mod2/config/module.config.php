@@ -66,6 +66,7 @@ return array(
 		    'mod2/test_template'          => __DIR__ . '/../view/test/test_template.phtml',
 		    'mod2/test_template1'          => __DIR__ . '/../view/test/test_template1.phtml',
 		    'mod2/test_template2'          => __DIR__ . '/../view/test/test_template2.phtml',
+		    'mod2/menu'                    => __DIR__ . '/../view/test/menu_view.phtml',
 		    'mod2/404'                     => __DIR__ . '/../view/test/page404.phtml',
 		    'mod2/403'                     => __DIR__ . '/../view/test/page403.phtml',
 		    'layout/new_layout'            => __DIR__ . '/../view/layout/layout.phtml',
