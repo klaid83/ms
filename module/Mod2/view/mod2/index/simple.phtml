@@ -1,0 +1,9 @@
+<?php
+
+$this->form->prepare();
+echo $this->form()->openTag($this->form);
+echo $this->formRow($this->form->get('parentId'));
+echo $this->formRow($this->form->get('type'));
+echo $this->formRow($this->form->get('comment'));
+echo $this->formSubmit($this->form->get('submit'));
+echo $this->form()->closeTag();

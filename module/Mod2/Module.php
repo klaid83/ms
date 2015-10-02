@@ -29,4 +29,19 @@ class Module
             ),
         );
     }
+
+	public function getFormElementConfig()
+	{
+		return array(
+			'factories' => array(
+				'commentForm' => function($sm)
+				{
+					$form = new \Mod2\Form\CommentForm();
+					$form->setInputFilter(new \Mod2\Form\CommentFilter());
+					$form->setHydrator(new \Zend\Stdlib\Hydrator\ObjectProperty());
+					return $form;
+				},
+			),
+		);
+	}
 }
