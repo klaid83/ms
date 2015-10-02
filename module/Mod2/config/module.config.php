@@ -71,4 +71,10 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+	// или сюда
+//	'view_helpers' => array(
+//		'invokables'=> array(
+//			'test_helper' => 'Mod2\View\Helper\Testhelper'
+//		)
+//	),
 );

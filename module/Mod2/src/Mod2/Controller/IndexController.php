@@ -72,4 +72,9 @@ class IndexController extends AbstractActionController
 		}
 		return array('form' => $form);
 	}
+
+	public function viewAction()
+	{
+		return new ViewModel();
+	}
 }
