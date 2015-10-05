@@ -370,4 +370,25 @@ class IndexController extends AbstractActionController
 			'countries' => $countries
 		));
 	}
+
+	public function countryAction()
+	{
+		$id = (int) $this->params()->fromQuery('id');
+
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		$country = $em->find('Mod1\Entity\Country', $id);
+
+		if (!$country instanceof \Mod1\Entity\Country)
+		{
+			die('FAIL');
+		}
+
+		return new ViewModel(array(
+			'country' => $country
+		));
+	}
+
+
 }
