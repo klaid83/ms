@@ -409,4 +409,23 @@ class IndexController extends AbstractActionController
 		));
 	}
 
+	public function cityAction()
+	{
+		$id = (int) $this->params()->fromQuery('id');
+
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		$city = $em->find('Mod1\Entity\City', $id);
+
+		if (!$city instanceof \Mod1\Entity\City)
+		{
+			die('FAIL');
+		}
+
+		return new ViewModel(array(
+			'city' => $city
+		));
+	}
+
 }
