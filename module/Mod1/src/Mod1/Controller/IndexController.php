@@ -19,7 +19,7 @@ class IndexController extends AbstractActionController
 //	    \Zend\Debug\Debug::dump($testService->getVar1());
 //	    \Zend\Debug\Debug::dump($testService->getVar2());
 
-	    // ������� ������� MyEvent
+	    // создаем событие MyEvent
 	    $this->getEventManager()->trigger('MyEvent', $this);
 
         return new ViewModel(array('vars' => $testService->getVars()));
@@ -244,5 +244,61 @@ class IndexController extends AbstractActionController
 	}
 
 
+	public function ContryCityInsertAction()
+	{
+		die;
 
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		// Insert
+		$country = new \Mod1\Entity\Country();
+		$country->setName('Россия');
+		$country->setDescription('Описание России');
+
+
+		$city = new \Mod1\Entity\City();
+		$city->setName('Нижний Новгород');
+		$city->setDescription('Описание Нижнего Новгорода');
+		$city->setCountry($country);
+
+		$city1 = new \Mod1\Entity\City();
+		$city1->setName('Москва');
+		$city1->setDescription('Описание Москвы');
+		$city1->setCountry($country);
+
+
+		$country->getCities()->add($city);
+		$country->getCities()->add($city1);
+
+		$em->persist($country);
+		$em->flush();
+		die;
+	}
+
+	public function ContryCitySelectAction()
+	{
+		// Select
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		// all cities for country
+		$country = $em->find('Mod1\Entity\Country', 1);
+		\Zend\Debug\Debug::dump($country->getName());
+//		\Zend\Debug\Debug::dump($country->getCities()->toArray());
+		/** @var $city \Mod1\Entity\City */
+		foreach($country->getCities() as $city)
+		{
+			\Zend\Debug\Debug::dump($city->getDescription());
+		}
+
+		// get city
+		$city = $em->find('Mod1\Entity\City', 1);
+
+		\Zend\Debug\Debug::dump($city->getName());
+		\Zend\Debug\Debug::dump($city->getCountry()->getName());
+		\Zend\Debug\Debug::dump($city->getCountry()->getDescription());
+
+		die;
+	}
 }
