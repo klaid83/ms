@@ -390,5 +390,23 @@ class IndexController extends AbstractActionController
 		));
 	}
 
+	public function citiesAction()
+	{
+		$id = (int) $this->params()->fromQuery('id');
+
+		$country = $this->getServiceLocator()
+			->get('Doctrine\ORM\EntityManager')
+			->getRepository('Mod1\Entity\Country')
+			->find($id);
+
+		if (!$country instanceof \Mod1\Entity\Country)
+		{
+			die("FAIL COUNTRY");
+		}
+
+		return new ViewModel(array(
+			'country' => $country
+		));
+	}
 
 }

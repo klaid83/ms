@@ -1,0 +1,18 @@
+<div class="jumbotron">
+	<?php echo $country->getName(); ?>
+</div>
+
+<div class="row">
+	<?php foreach($country->getCities() as $city): ?>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $city->getName(); ?></h3>
+            </div>
+            <div class="panel-body">
+	            <?php echo $city->getDescription(); ?>
+            </div>
+        </div>
+    </div>
+	<?php endforeach; ?>
+</div>
