@@ -301,4 +301,55 @@ class IndexController extends AbstractActionController
 
 		die;
 	}
+
+	public function ResortInsertAction()
+	{
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		// Insert
+//		$country = new \Mod1\Entity\Country();
+//		$country->setName('Испания');
+//		$country->setDescription('Описание Испании');
+//
+//
+//		$city = new \Mod1\Entity\City();
+//		$city->setName('Мадрид');
+//		$city->setDescription('Описание Мадрида');
+//		$city->setCountry($country);
+//
+//		$country->getCities()->add($city);
+//
+//		$em->persist($country);
+//		$em->flush();
+
+
+		// get city
+//		$city = $em->find('Mod1\Entity\City', 5);
+//
+//		\Zend\Debug\Debug::dump($city->getName());
+//		\Zend\Debug\Debug::dump($city->getCountry()->getName());
+//		\Zend\Debug\Debug::dump($city->getCountry()->getDescription());
+
+
+//		$resort = new \Mod1\Entity\Resort();
+//		$resort->setName('Курорт');
+//		$resort->setDescription('Описание Курорта');
+//
+//		$city = $em->find('Mod1\Entity\City', 5);
+//
+//			\Zend\Debug\Debug::dump($city->getResorts());die;
+//		$city->getResorts()->add($resort);
+//
+//		$em->persist($city);
+//		$em->flush();
+//
+		die;
+	}
+
+	public function ResortSelectAction()
+	{
+		die;
+	}
+
 }

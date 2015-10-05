@@ -37,6 +37,16 @@ class City
 	 */
 	protected $country;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="Resort", mappedBy="city", cascade={"persist"})
+	 */
+	protected $resorts;
+
+	public function __construct()
+	{
+		$this->resorts = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+
 	public function setCityId($city_id)
 	{
 		$this->city_id = $city_id;
@@ -75,6 +85,16 @@ class City
 	public function getName()
 	{
 		return $this->name;
+	}
+
+	public function setResorts($resorts)
+	{
+		$this->resorts = $resorts;
+	}
+
+	public function getResorts()
+	{
+		return $this->resorts;
 	}
 
 }
