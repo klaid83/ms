@@ -341,4 +341,21 @@ class IndexController extends AbstractActionController
 		die;
 	}
 
+	public function ResortInsert1Action()
+	{
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		// Insert
+		$resort = new \Mod1\Entity\Resort();
+		$resort->setName('Курорт1');
+		$resort->setDescription('Описание Курорта1');
+		$resort->setCity($em->find('Mod1\Entity\City', 5));
+
+		$em->persist($resort);
+		$em->flush();
+
+		die;
+	}
+
 }
