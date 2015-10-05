@@ -358,4 +358,16 @@ class IndexController extends AbstractActionController
 		die;
 	}
 
+
+	public function countriesAction()
+	{
+		$countries = $this->getServiceLocator()
+			->get('Doctrine\ORM\EntityManager')
+			->getRepository('Mod1\Entity\Country')
+			->findAll();
+
+		return new ViewModel(array(
+			'countries' => $countries
+		));
+	}
 }

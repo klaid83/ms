@@ -1,0 +1,26 @@
+<?php
+//if ()
+//{
+//	$countries = array();
+//}
+
+?>
+
+<div class="jumbotron">
+	countries
+</div>
+
+<div class="row">
+	<?php foreach($countries as $country): ?>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?php echo $country->getName(); ?></h3>
+            </div>
+            <div class="panel-body">
+	            <?php echo $country->getDescription(); ?>
+            </div>
+        </div>
+    </div>
+	<?php endforeach; ?>
+</div>
