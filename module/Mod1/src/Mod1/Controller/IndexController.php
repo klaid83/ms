@@ -330,6 +330,14 @@ class IndexController extends AbstractActionController
 
 	public function ResortSelectAction()
 	{
+		// Select
+		$em = $this->getServiceLocator()
+			->get('doctrine.entitymanager.orm_default');
+
+		$resort = $em->find('Mod1\Entity\Resort', 1);
+		\Zend\Debug\Debug::dump($resort->getName());
+		\Zend\Debug\Debug::dump($resort->getCity()->getName());
+		\Zend\Debug\Debug::dump($resort->getCity()->getCountry()->getName());
 		die;
 	}
 
