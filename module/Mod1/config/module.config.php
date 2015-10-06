@@ -35,6 +35,19 @@ return array(
                     ),
                 ),
             ),
+	        'country' => array(
+		        'type'    => 'segment',
+		        'options' => array(
+			        'route'    => '/country/:id',
+			        'constraints' => array(
+				        'id'     => '[0-9]+',
+			        ),
+			        'defaults' => array(
+				        'controller' => 'Mod1\Controller\Index',
+				        'action'     => 'country',
+			        ),
+		        ),
+	        ),
         ),
     ),
     'service_manager' => array(

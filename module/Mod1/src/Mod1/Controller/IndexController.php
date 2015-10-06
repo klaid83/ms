@@ -373,7 +373,13 @@ class IndexController extends AbstractActionController
 
 	public function countryAction()
 	{
-		$id = (int) $this->params()->fromQuery('id');
+		$id = (int) $this->params()->fromRoute('id', 0);
+
+		if (!$id)
+		{
+			$this->flashMessenger()->addErrorMessage('Country id doesn\'t set');
+//			return $this->redirect()->toRoute('blog');
+		}
 
 		$em = $this->getServiceLocator()
 			->get('doctrine.entitymanager.orm_default');
@@ -382,7 +388,8 @@ class IndexController extends AbstractActionController
 
 		if (!$country instanceof \Mod1\Entity\Country)
 		{
-			die('FAIL');
+			return $this->page404();
+//			die('FAIL');
 		}
 
 		return new ViewModel(array(
