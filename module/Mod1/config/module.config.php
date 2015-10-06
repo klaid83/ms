@@ -48,6 +48,42 @@ return array(
 			        ),
 		        ),
 	        ),
+	        'city' => array(
+		        'type'    => 'segment',
+		        'options' => array(
+			        'route'    => '/city/:id',
+			        'constraints' => array(
+				        'id'     => '[0-9]+',
+			        ),
+			        'defaults' => array(
+				        'controller' => 'Mod1\Controller\Index',
+				        'action'     => 'city',
+			        ),
+		        ),
+	        ),
+	        'countries' => array(
+		        'type' => 'Zend\Mvc\Router\Http\Literal',
+		        'options' => array(
+			        'route' => '/countries',
+			        'defaults' => array(
+				        'controller' => 'Mod1\Controller\Index',
+				        'action' => 'countries',
+			        )
+		        )
+	        ),
+	        'cities' => array(
+		        'type'    => 'segment',
+		        'options' => array(
+			        'route'    => '/cities/:id',
+			        'constraints' => array(
+				        'id'     => '[0-9]+',
+			        ),
+			        'defaults' => array(
+				        'controller' => 'Mod1\Controller\Index',
+				        'action'     => 'cities',
+			        ),
+		        ),
+	        ),
         ),
     ),
     'service_manager' => array(

@@ -399,7 +399,15 @@ class IndexController extends AbstractActionController
 
 	public function citiesAction()
 	{
-		$id = (int) $this->params()->fromQuery('id');
+//		$id = (int) $this->params()->fromQuery('id');
+
+		$id = (int) $this->params()->fromRoute('id', 0);
+
+		if (!$id)
+		{
+			$this->flashMessenger()->addErrorMessage('City id doesn\'t set');
+//			return $this->redirect()->toRoute('blog');
+		}
 
 		$country = $this->getServiceLocator()
 			->get('Doctrine\ORM\EntityManager')
@@ -418,7 +426,15 @@ class IndexController extends AbstractActionController
 
 	public function cityAction()
 	{
-		$id = (int) $this->params()->fromQuery('id');
+//		$id = (int) $this->params()->fromQuery('id');
+
+		$id = (int) $this->params()->fromRoute('id', 0);
+
+		if (!$id)
+		{
+			$this->flashMessenger()->addErrorMessage('City id doesn\'t set');
+//			return $this->redirect()->toRoute('blog');
+		}
 
 		$em = $this->getServiceLocator()
 			->get('doctrine.entitymanager.orm_default');
