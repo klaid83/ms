@@ -12,7 +12,8 @@ class IndexController extends AbstractActionController
 	    /** @var \Mod1\Service\TestService $testService */
 	    $testService = $this->getServiceLocator()->get('TestService');
 
-
+	    $access = new \Mod1\Permission\AccessPermissions();
+	    \Zend\Debug\Debug::dump($access->canEdit(10));
 //	    return $this->page404();
 
 
