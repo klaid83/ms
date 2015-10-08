@@ -31,16 +31,7 @@
         echo $this->test_helper("me","q");
     ?>
     <div class="nav-collapse">
-	    <?php
-//echo $this->navigation()->menu();
-//	    \Zend\Debug\Debug::dump($this->navigation());
-//	    echo $this->navigation('Navigation')->menu()->render();
-//	    \Zend\Debug\Debug::dump($this->navigation('Navigation')->navigation()); die;
-
-//	    echo $this->navigation('Navigation')->menu()->setUlClass('nav');
-
-
-	    ?>
+	    <?php echo $this->navigation('Navigation')->menu()->setUlClass('nav'); ?>
     </div>
         <nav class="navbar navbar-fixed-top" role="navigation">
             <div class="container">
