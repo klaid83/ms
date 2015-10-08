@@ -2,8 +2,18 @@
 
 namespace Mod1;
 
+
+use Mod1\Exception\AccessDeniedException;
+use Mod1\Exception\NoAccessException;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Log\Logger;
+use Zend\Log\Writer\Stream;
+use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\Model\ViewModel;
+use Zend\ModuleManager\Feature\FormElementProviderInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ServiceManager\ServiceManager;
 
 class Module
 {
@@ -23,23 +33,28 @@ class Module
 		    \Zend\Debug\Debug::dump('MyEvent');
 	    });
 
-	    $em = $e->getApplication()->getEventManager();
-	    $em->attach('dispatch', array($this, 'checkAuth'), 100);
-	    $em->attach(MvcEvent::EVENT_ROUTE, array($this, 'checkAuth'), 100);
-	    // OR
-	    $em->attach(MvcEvent::EVENT_DISPATCH, function() {
-		    \Zend\Debug\Debug::dump('checkAuth');
-		    // Some logic.
-	    }, 100);
+	    // отлавливаем exception
+	    $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'exceptionHandler'));
 
-	    /**
-	    MvcEvent::EVENT_BOOTSTRAP
-	    MvcEvent::EVENT_DISPATCH
-	    MvcEvent::EVENT_DISPATCH_ERROR
-	    MvcEvent::EVENT_FINISH
-	    MvcEvent::EVENT_RENDER
-	    MvcEvent::EVENT_ROUTE
-	     */
+
+//	    $this->registerErrorHandling($e);
+//	    $em = $e->getApplication()->getEventManager();
+//	    $em->attach('dispatch', array($this, 'checkAuth'), 100);
+//	    $em->attach(MvcEvent::EVENT_ROUTE, array($this, 'checkAuth'), 100);
+//	    // OR
+//	    $em->attach(MvcEvent::EVENT_DISPATCH_ERROR, function() {
+//		    \Zend\Debug\Debug::dump('checkAuth');
+//		    // Some logic.
+//	    }, 100);
+//
+//	    /**
+//	    MvcEvent::EVENT_BOOTSTRAP
+//	    MvcEvent::EVENT_DISPATCH
+//	    MvcEvent::EVENT_DISPATCH_ERROR
+//	    MvcEvent::EVENT_FINISH
+//	    MvcEvent::EVENT_RENDER
+//	    MvcEvent::EVENT_ROUTE
+//	     */
     }
 
 	public function checkAuth()
@@ -81,9 +96,109 @@ class Module
 			'factories' => array (
 				'TestService' => 'Mod1\Factories\TestServiceFactory',
 				'Navigation' => 'Mod1\Navigation\MyNavigationFactory',
+				'ErrorHandling' => 'Mod1\Factories\ErrorHandlingFactory',
 			),
 			'abstract_factories' => array (
 			),
 		);
 	}
+
+
+	/**
+	 * @param MvcEvent $e
+	 */
+	public function registerErrorHandling(MvcEvent $e)
+	{
+
+		$eventManager = $e->getApplication()->getEventManager();
+		$eventManager->attach(
+			MvcEvent::EVENT_DISPATCH_ERROR,
+			function ($event) use ($e) {
+				$sm = $e->getApplication()->getServiceManager();
+				$service = $sm->get('ErrorHandling');
+
+				$exception = $event->getResult()->exception;
+				if ($exception) {
+					$service->logException($exception);
+				}
+			}
+		);
+		set_error_handler(
+			function ($c, $m, $f, $l) use ($e) {
+				$sm = $e->getApplication()->getServiceManager();
+				$service = $sm->get('ErrorHandling');
+				$service->logException(func_get_args());
+			}
+		);
+		register_shutdown_function(
+			function () use ($e) {
+				$error = error_get_last();
+				$sm = $e->getApplication()->getServiceManager();
+				if ($error &&
+					($error['type'] == E_ERROR || $error['type'] == E_PARSE || $error['type'] == E_COMPILE_ERROR)
+				) {
+					$service = $sm->get('ErrorHandling');
+					if (strpos($error['message'], 'Allowed memory size') == 0) {
+						ini_set('memory_limit', (intval(ini_get('memory_limit')) + 64) . "M");
+					}
+					$service->logException($error);
+				}
+			}
+		);
+	}
+
+
+	/**
+	 *
+	 * Регистрирует изменённую стратегию рендеринга PhpRenderStrategy
+	 *
+	 * @param MvcEvent $e
+	 */
+	public function attachCustomPhpRenderer(MvcEvent $e)
+	{
+		$matches = $e->getRouteMatch();
+		$controller = $matches->getParam('controller');
+		$action = $matches->getParam('action');
+		$initialNamespace = $matches->getParam('initialNamespace');
+		if (false === strpos($controller, __NAMESPACE__)) {
+			// not a controller from this module
+			return;
+		}
+		//Action create-closed используется из другого экшона
+		if (false === strpos($initialNamespace, __NAMESPACE__) && $action == 'create-closed') {
+			return;
+		}
+		$locator = $sm = $e->getApplication()->getServiceManager();
+		$view = $locator->get('Zend\View\View');
+		$metaRenderStrategy = $locator->get('PhpRendererStrategy');
+		$view->getEventManager()->attach($metaRenderStrategy);
+	}
+
+
+
+
+
+	public function exceptionHandler(MvcEvent $e)
+	{
+		$exception = $e->getParam('exception');
+
+		if($exception instanceof AccessDeniedException || $exception instanceof NoAccessException) {
+			$model = new ViewModel();
+			$model->setTerminal(false);
+
+			if($exception instanceof AccessDeniedException) {
+				$model->setTemplate('mod1/test_template1');
+			} elseif ($exception instanceof NoAccessException) {
+				$model->setTemplate('mod1/test_template2');
+			}
+
+			$response = $e->getResponse();
+			$response->setStatusCode(403);
+
+			$e->setResponse($response);
+			$e->setResult($model);
+			return;
+		}
+	}
+
 }
