@@ -93,6 +93,19 @@ return array(
         ),
         'factories' => array(
             'translator' => 'Zend\Mvc\Service\TranslatorServiceFactory',
+	        'Zend\Db\Adapter\Adapter' => function ($sm) {
+		        $config = $sm->get('Config');
+		        $dbParams = $config['dbParams'];
+
+		        return new \Zend\Db\Adapter\Adapter(array(
+			        'driver' => 'Pdo_Mysql',
+			        'dsn' => 'mysql:dbname='.$dbParams['database'].';host='.$dbParams['hostname'],
+			        'database' => $dbParams['database'],
+			        'username' => $dbParams['username'],
+			        'password' => $dbParams['password'],
+			        'hostname' => $dbParams['hostname'],
+		        ));
+	        },
         ),
     ),
     'translator' => array(

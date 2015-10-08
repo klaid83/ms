@@ -13,4 +13,10 @@
 
 return array(
     // ...
+	'dbParams' => array(
+		'database' => 'ms_db',
+		'username' => 'root',
+		'password' => '',
+		'hostname' => 'localhost',
+	)
 );

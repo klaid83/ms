@@ -43,8 +43,19 @@ class Module
 	public function getServiceConfig()
 	{
 		return array (
+			'initializers' => array(
+				function ($instance, $sm) {
+					if ($instance instanceof \Zend\Db\Adapter\AdapterAwareInterface) {
+						$instance->setDbAdapter($sm->get('Zend\Db\Adapter\Adapter'));
+					}
+				}
+			),
+			'invokables' => array(
+				'menu' => 'Mod1\Model\MenuTable'
+			),
 			'factories' => array (
 				'TestService' => 'Mod1\Factories\TestServiceFactory',
+				'Navigation' => 'Mod1\Navigation\MyNavigationFactory',
 			),
 			'abstract_factories' => array (
 			),
