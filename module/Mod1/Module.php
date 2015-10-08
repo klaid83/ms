@@ -22,7 +22,32 @@ class Module
 	    $sem->attach('Mod1\Controller\IndexController', 'MyEvent', function($e) {
 		    \Zend\Debug\Debug::dump('MyEvent');
 	    });
+
+	    $em = $e->getApplication()->getEventManager();
+	    $em->attach('dispatch', array($this, 'checkAuth'), 100);
+	    $em->attach(MvcEvent::EVENT_ROUTE, array($this, 'checkAuth'), 100);
+	    // OR
+	    $em->attach(MvcEvent::EVENT_DISPATCH, function() {
+		    \Zend\Debug\Debug::dump('checkAuth');
+		    // Some logic.
+	    }, 100);
+
+	    /**
+	    MvcEvent::EVENT_BOOTSTRAP
+	    MvcEvent::EVENT_DISPATCH
+	    MvcEvent::EVENT_DISPATCH_ERROR
+	    MvcEvent::EVENT_FINISH
+	    MvcEvent::EVENT_RENDER
+	    MvcEvent::EVENT_ROUTE
+	     */
     }
+
+	public function checkAuth()
+	{
+		\Zend\Debug\Debug::dump('function checkAuth');
+		// Some logic.
+	}
+
 
     public function getConfig()
     {
