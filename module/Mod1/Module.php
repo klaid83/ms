@@ -173,31 +173,4 @@ class Module
 		$view->getEventManager()->attach($metaRenderStrategy);
 	}
 
-
-
-
-
-	public function exceptionHandler(MvcEvent $e)
-	{
-		$exception = $e->getParam('exception');
-
-		if($exception instanceof AccessDeniedException || $exception instanceof NoAccessException) {
-			$model = new ViewModel();
-			$model->setTerminal(false);
-
-			if($exception instanceof AccessDeniedException) {
-				$model->setTemplate('mod1/test_template1');
-			} elseif ($exception instanceof NoAccessException) {
-				$model->setTemplate('mod1/test_template2');
-			}
-
-			$response = $e->getResponse();
-			$response->setStatusCode(403);
-
-			$e->setResponse($response);
-			$e->setResult($model);
-			return;
-		}
-	}
-
 }
