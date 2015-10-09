@@ -50,6 +50,8 @@ return array(
 		    'mod3/test_layout2'    => __DIR__ . '/../view/test/test_layout2.phtml',
 		    'mod3/test_layout3'    => __DIR__ . '/../view/test/test_layout3.phtml',
 		    'mod3/test_layout4'    => __DIR__ . '/../view/test/test_layout4.phtml',
+		    'mod3/access_denied'    => __DIR__ . '/../view/test/access_denied.phtml',
+		    'mod3/no_access'    => __DIR__ . '/../view/test/no_access.phtml',
 	    ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
