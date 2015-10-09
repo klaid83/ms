@@ -1,6 +1,6 @@
 <?php
 
-namespace Mod1\Exception;
+namespace Mod3\Exception;
 
 
 class NoAccessException extends \Exception

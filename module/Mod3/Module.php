@@ -4,6 +4,7 @@ namespace Mod3;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\View\Model\ViewModel;
 
 class Module
 {
@@ -12,6 +13,10 @@ class Module
 		$eventManager        = $e->getApplication()->getEventManager();
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
+
+		// отлавливаем exception
+		$eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'exceptionHandler'));
+
 	}
 
 	public function getConfig()
@@ -28,5 +33,28 @@ class Module
 				),
 			),
 		);
+	}
+
+	public function exceptionHandler(MvcEvent $e)
+	{
+		$exception = $e->getParam('exception');
+
+		if($exception instanceof \Mod3\Exception\AccessDeniedException || $exception instanceof \Mod3\Exception\NoAccessException) {
+			$model = new ViewModel();
+			$model->setTerminal(false);
+
+			if($exception instanceof \Mod3\Exception\AccessDeniedException) {
+				$model->setTemplate('mod3/access_denied');
+			} elseif ($exception instanceof \Mod3\Exception\NoAccessException) {
+				$model->setTemplate('mod3/no_access');
+			}
+
+			$response = $e->getResponse();
+			$response->setStatusCode(403);
+
+			$e->setResponse($response);
+			$e->setResult($model);
+			return;
+		}
 	}
 }

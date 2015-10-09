@@ -11,4 +11,15 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+
+	public function accessDeniedAction()
+	{
+		throw new \Mod3\Exception\AccessDeniedException();
+	}
+
+	public function noAccessAction()
+	{
+	    throw new \Mod3\Exception\NoAccessException();
+	}
+
 }
