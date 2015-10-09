@@ -33,8 +33,7 @@ class Module
 		    \Zend\Debug\Debug::dump('MyEvent');
 	    });
 
-	    // отлавливаем exception
-	    $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, array($this, 'exceptionHandler'));
+
 
 
 //	    $this->registerErrorHandling($e);
