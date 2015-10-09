@@ -4,7 +4,6 @@ namespace Mod3;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use Zend\View\Model\ViewModel;
 
 class Module
 {
