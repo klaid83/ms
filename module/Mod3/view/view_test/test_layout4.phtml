@@ -3,6 +3,13 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+
+	<?php if ($this->panelLeft) : ?>
+		<div data-role="panel-left">
+			<?php echo $this->panelLeft ?>
+		</div>
+	<?php endif; ?>
+
 	<?php echo $this->headTitle('AppLayout')->setSeparator(' - ')->setAutoEscape(false) ?>
 
 	<?php echo $this->headMeta()

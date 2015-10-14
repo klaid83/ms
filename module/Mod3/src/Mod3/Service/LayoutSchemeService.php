@@ -362,6 +362,7 @@ $em = $this->getServiceLocator()->get('eventmanager');
 	 * @return LayoutSchemeOptions
 	 */
 	protected function getActiveSchemeOptions() {
+//		$this->getOptions()->setActiveScheme('zf2-standard');
 		return $this->getSchemeOptions($this->getOptions()->getActiveScheme());
 	}
 

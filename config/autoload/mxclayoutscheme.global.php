@@ -42,14 +42,16 @@ return array(
 						),
 					),
 					'defaults' => array(
-						'layout'      => 'mod3/test_layout1',
+						'layout'      => 'mod3/test_layout4', // здесь невставится panelLeft в лайаут
+
 					),
 				),
 				'route_layouts' => array( // Rules for module, controller, action get applied for layout selection. Default: true
 					'options' => array(
 					),
 					'defaults' => array(
-						'layout'      => 'mod3/test_layout1',
+						'layout'      => 'mod3/test_layout4',      //
+						'panelLeft' => 'mod3/test_template2',      // везде будет вставляться шаблон в лайаут
 					),
 				),
 				'http_status_layouts' => array( // Rules based on status code get applied for layout selection on dispatch errors. Default: true
