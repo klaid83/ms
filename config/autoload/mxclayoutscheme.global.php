@@ -35,28 +35,31 @@ return array(
 				),
 			),
 			'my-scheme' => array(
-				'mca_layouts' => array(
+				'mca_layouts' => array( // Rules for module, controller, action get applied for layout selection. Default: true
+					'options' => array(
+						'Mod3' => array(
+							'layout'      => 'mod3/test_layout4',
+						),
+					),
+					'defaults' => array(
+						'layout'      => 'mod3/test_layout1',
+					),
+				),
+				'route_layouts' => array( // Rules for module, controller, action get applied for layout selection. Default: true
 					'options' => array(
 					),
 					'defaults' => array(
 						'layout'      => 'mod3/test_layout1',
 					),
 				),
-				'route_layouts' => array(
-					'options' => array(
-					),
-					'defaults' => array(
-						'layout'      => 'mod3/test_layout1',
-					),
-				),
-				'http_status_layouts' => array(
+				'http_status_layouts' => array( // Rules based on status code get applied for layout selection on dispatch errors. Default: true
 					'options'  => array(
 					),
 					'defaults' => array(
 						'layout'      => 'mod3/test_layout1',
 					),
 				),
-				'error_layouts' => array(
+				'error_layouts' => array( // Rules based on event error code get applied for layout selection on dispatch errors. Default: true
 					'options'  => array(
 
 					),
