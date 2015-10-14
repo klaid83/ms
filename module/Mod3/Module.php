@@ -4,18 +4,24 @@ namespace Mod3;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\Console\Request as ConsoleRequest;
 
 class Module
 {
 	public function onBootstrap(MvcEvent $e)
 	{
+		//--- do not install MxcLayoutScheme for console requests
+		if ($e->getRequest() instanceof ConsoleRequest) return;
+
 		$app                 = $e->getApplication();
 		$eventManager        = $app->getEventManager();
 		$serviceLocator      = $app->getServiceManager();
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
 
-		$eventManager->attachAggregate($serviceLocator->get('Listener.GuardExceptionStrategy'));
+//		$eventManager->attachAggregate($serviceLocator->get('Listener.GuardExceptionStrategy'));
+		$eventManager->attach($serviceLocator->get('mxc_layoutscheme_service'));
 	}
 
 	public function getConfig()
@@ -40,5 +46,13 @@ class Module
 	public function getServiceConfig()
 	{
 		return include __DIR__ . '/config/services.config.php';
+	}
+
+	public function getControllerPluginConfig() {
+		return array(
+			'invokables' => array(
+				'layoutScheme' => 'Mod3\Controller\Plugin\LayoutSchemePlugin',
+			)
+		);
 	}
 }
