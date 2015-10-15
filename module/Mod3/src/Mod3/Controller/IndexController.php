@@ -9,6 +9,17 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+		$panel_left_service = $this->getServiceLocator()->get('panel_left_service');
+
+
+	    $arrayLeft = array(
+		    'var_1' => 'some_1',
+		    'var_2' => 'some_2',
+		    'var_3' => 'some_3',
+		    'var_4' => 'some_4',
+	    );
+	    $panel_left_service->initPanelLeft($arrayLeft);
+
         return new ViewModel();
     }
 

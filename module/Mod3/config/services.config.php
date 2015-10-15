@@ -6,6 +6,7 @@ return array(
 		),
 		'abstract_factories' => array(),
 		'factories' => array(
-			'mxc_layoutscheme_service' 	=> 'Mod3\Service\LayoutSchemeServiceFactory'
+			'mxc_layoutscheme_service' 	=> 'Mod3\Service\LayoutSchemeServiceFactory',
+			'panel_left_service' 	=> 'Mod3\Service\PanelLeftServiceFactory',
 		),
 	);
