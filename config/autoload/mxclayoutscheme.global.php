@@ -38,8 +38,9 @@ return array(
 				'mca_layouts' => array( // Rules for module, controller, action get applied for layout selection. Default: true
 					'options' => array(
 						'Mod3' => array(
-							'layout'      => 'mod3/test_layout4',
-							'panelLeft' => 'mod3/test_template2', // теперь только здесь будет вставляться
+							'layout'     => 'mod3/mod3_layout',
+							'panelLeft'  => 'mod3/panelLeft',    // теперь только здесь будет вставляться
+							'panelRight' => 'mod3/panelRight',   // теперь только здесь будет вставляться
 						),
 					),
 					'defaults' => array(
@@ -51,7 +52,7 @@ return array(
 					'options' => array(
 					),
 					'defaults' => array(
-						'layout'      => 'mod3/test_layout4',      //
+						'layout'      => 'mod3/test_layout1',      //
 //						'panelLeft' => 'mod3/test_template2',      // везде будет вставляться шаблон в лайаут
 					),
 				),
@@ -67,7 +68,7 @@ return array(
 
 					),
 					'defaults' => array(
-						'layout'      => 'mod3/test_layout2',
+						'layout'      => 'mod3/test_layout1',
 					),
 				),
 			),
