@@ -5,13 +5,13 @@ use Zend\View\Model\ViewModel;
 
 class PanelLeftService
 {
+	/** @var $sl \Zend\ServiceManager\ServiceManager */
 	protected $sl;
 
 	public function initPanelLeft($arrayLeft)
 	{
-
 		/** @var $view \Zend\View\Model\ViewModel */
-		$view = $this->sl->get('view_manager')->getViewModel();
+		$view = $this->getSl()->get('view_manager')->getViewModel();
 
 		/** @var  $view_children \Zend\View\Model\ViewModel */
 		foreach($view->getChildren() as $view_children)
@@ -19,6 +19,7 @@ class PanelLeftService
 			if ($view_children->captureTo() == 'panelLeft')
 			{
 				$view_children->setVariables($arrayLeft);
+				break;
 			}
 		}
 
