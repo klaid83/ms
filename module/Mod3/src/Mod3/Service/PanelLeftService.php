@@ -22,7 +22,6 @@ class PanelLeftService
 				break;
 			}
 		}
-
 	}
 
 	public function setSl($sl)
