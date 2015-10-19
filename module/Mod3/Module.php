@@ -55,4 +55,20 @@ class Module
 			)
 		);
 	}
+
+	public function getViewHelperConfig()
+	{
+		return array(
+			'factories' => array(
+				'list_helper' => function($sm) {
+					$helper = new View\Helper\ListHelper ;
+					return $helper;
+				},
+				'list1_helper' => function($sm) {
+					$helper = new View\Helper\List1Helper ;
+					return $helper;
+				}
+			)
+		);
+	}
 }
