@@ -41,4 +41,19 @@ class Module
 		return include __DIR__ . '/config/services.config.php';
 	}
 
+	public function getViewHelperConfig()
+	{
+		return array(
+			'factories' => array(
+				'menu_country_helper' => function($sm) {
+					$helper = new View\Helper\MenuCountryHelper ;
+					return $helper;
+				},
+				'menu_city_helper' => function($sm) {
+					$helper = new View\Helper\MenuCityHelper ;
+					return $helper;
+				},
+			)
+		);
+	}
 }

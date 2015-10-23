@@ -26,7 +26,29 @@
 	</head>
 	<body>
 		<h4><?php echo __FILE__; ?></h4>
-		<?php echo $this->content; ?>
+		<div class="row">
+			<div class="col-md-2">
+				<?php if ($this->panelLeft) : ?>
+					<div data-role="panel-left">
+						<?php echo $this->panelLeft ?>
+					</div>
+				<?php endif; ?>
+			</div>
+			<div class="col-md-8">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<?php echo $this->content; ?>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<?php if ($this->panelRight) : ?>
+					<div data-role="panel-left">
+						<?php echo $this->panelRight ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		</div>
 	</body>
 </html>
 

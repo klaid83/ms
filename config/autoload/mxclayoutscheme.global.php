@@ -42,6 +42,11 @@ return array(
 							'panelLeft'  => 'mod3/panelLeft',    // теперь только здесь будет вставляться
 							'panelRight' => 'mod3/panelRight',   // теперь только здесь будет вставляться
 						),
+						'ModT' => array(
+							'layout'     => 'modt/layout',
+							'panelLeft'  => 'modt/panelLeft',
+							'panelRight' => 'modt/panelRight',
+						),
 					),
 					'defaults' => array(
 						'layout'      => 'mod3/test_layout4', // здесь невставится panelLeft в лайаут
