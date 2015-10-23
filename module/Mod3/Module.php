@@ -67,7 +67,11 @@ class Module
 				'list1_helper' => function($sm) {
 					$helper = new View\Helper\List1Helper ;
 					return $helper;
-				}
+				},
+				'service_menu_helper' => function($sm) {
+					$helper = new View\Helper\ServiceMenuHelper ;
+					return $helper;
+				},
 			)
 		);
 	}

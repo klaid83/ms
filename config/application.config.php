@@ -15,6 +15,7 @@ return array(
         'Mod1',
         'Mod2',
         'Mod3',
+        'ModT',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
