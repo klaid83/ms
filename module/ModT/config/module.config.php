@@ -5,32 +5,47 @@ namespace ModT;
 return array(
     'router' => array(
         'routes' => array(
-            'modt' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/modt',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'ModT\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
-                    ),
-                ),
-            ),
+//            'modt' => array(
+//                'type'    => 'Literal',
+//                'options' => array(
+//                    'route'    => '/modt',
+//                    'defaults' => array(
+//                        '__NAMESPACE__' => 'ModT\Controller',
+//                        'controller'    => 'Index',
+//                        'action'        => 'index',
+//                    ),
+//                ),
+//                'may_terminate' => true,
+//                'child_routes' => array(
+//                    'default' => array(
+//                        'type'    => 'Segment',
+//                        'options' => array(
+//                            'route'    => '/[:controller[/:action]]',
+//                            'constraints' => array(
+//                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                            ),
+//                            'defaults' => array(
+//                            ),
+//                        ),
+//                    ),
+//                ),
+//            ),
+	        'directory' => array(
+		        'type'    => 'segment',
+		        'options' => array(
+			        'route'    => '/directory/[:country[/:city]]',
+			        'constraints' => array(
+				        'country' => '[a-zA-Z][a-zA-Z0-9_-]*',
+				        'city'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+			        ),
+			        'defaults' => array(
+				        '__NAMESPACE__' => 'ModT\Controller',
+				        'controller'    => 'Index',
+				        'action'        => 'index',
+			        ),
+		        ),
+	        ),
         ),
     ),
     'controllers' => array(

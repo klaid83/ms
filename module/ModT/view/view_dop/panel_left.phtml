@@ -4,7 +4,8 @@
 	{
 		echo $this->menu_country_helper($this->vars['menu_country']);
 	}
-	elseif (isset($this->vars['menu_city']))
+
+	if (isset($this->vars['menu_city']))
 	{
 		echo $this->menu_city_helper($this->vars['menu_city']);
 	}

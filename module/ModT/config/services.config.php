@@ -5,5 +5,6 @@ return array(
 		),
 		'abstract_factories' => array(),
 		'factories' => array(
+			'menu_service' 	=> 'ModT\Service\MenuServiceFactory',
 		),
 	);
