@@ -15,7 +15,7 @@ class IndexController extends AbstractActionController
 
 //	    if (!$id)
 	    {
-		    $this->flashMessenger()->addErrorMessage('City id doesn\'t set');
+//		    $this->flashMessenger()->addErrorMessage('City id doesn\'t set');
 //			return $this->redirect()->toRoute('blog');
 	    }
 
