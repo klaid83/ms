@@ -14,7 +14,7 @@ class IndexController extends AbstractActionController
 
 
 
-	    throw new \HttpRuntimeException ;
+//	    throw new \HttpRuntimeException ;
 
 //	    if (!$id)
 	    {
