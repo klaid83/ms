@@ -29,19 +29,18 @@ class ExceptionStrategy extends AbstractListenerAggregate
 	public function onDispatchError(MvcEvent $event)
 	{
 		$exception = $event->getParam('exception');
-		if($exception instanceof \ModT\Exception\AccessDeniedException
-			|| $exception instanceof \ModT\Exception\NoAccessException
-		)
-		{
 
+		if ($exception instanceof \ModT\Exception\AccessException)
+		{
 			$model = new ViewModel();
 			$model->setTerminal(false);
 
-			if($exception instanceof \ModT\Exception\AccessDeniedException)
+			if ($exception instanceof \ModT\Exception\AccessDeniedException)
 			{
+
 				$model->setTemplate('mod3/access_denied');
 			}
-			elseif ($exception instanceof \ModT\Exception\NoAccessException)
+			else if ($exception instanceof \ModT\Exception\NoAccessException)
 			{
 				$model->setTemplate('mod3/no_access');
 			}
