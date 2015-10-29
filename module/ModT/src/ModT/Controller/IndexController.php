@@ -13,8 +13,9 @@ class IndexController extends AbstractActionController
 	    $city    = $this->params()->fromRoute('city', 0);
 
 //	    \Zend\Debug\Debug::dump(get_class_methods($this));
-		$this->page_exception()->page404();
-		$this->page_exception()->noAccessAction();
+//		$this->page_exception()->page404();
+//		$this->page_exception()->accessDeniedAction();
+//		$this->page_exception()->noAccessAction();
 
 //	    throw new \HttpRuntimeException ;
 

@@ -3,7 +3,7 @@
 namespace ModT\Exception;
 
 
-class AccessDeniedException extends AccessException
+class AccessDeniedException extends \Exception
 {
 
 }

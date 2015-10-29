@@ -30,47 +30,34 @@ class ExceptionStrategy extends AbstractListenerAggregate
 	{
 		$exception = $event->getParam('exception');
 
-		if ($exception instanceof \ModT\Exception\AccessException)
+		if ($exception instanceof \ModT\Exception\AccessDeniedException)
 		{
-			$model = new ViewModel();
-			$model->setTerminal(false);
-
-			if ($exception instanceof \ModT\Exception\AccessDeniedException)
-			{
-
-				$model->setTemplate('mod3/access_denied');
-			}
-			else if ($exception instanceof \ModT\Exception\NoAccessException)
-			{
-				$model->setTemplate('mod3/no_access');
-			}
-
-			/** @var $response  \Zend\Http\PhpEnvironment\Response */
-			$response = $event->getResponse();
-			$response->setStatusCode(403);
-
-			$event->setResponse($response);
-			$event->setResult($model);
-			return;
+			$this->displayError($event, 403, 'mod3/access_denied');
 		}
-
-		if ($exception instanceof \ModT\Exception\PageException)
+		else if ($exception instanceof \ModT\Exception\NoAccessException)
 		{
-			$model = new ViewModel();
-			$model->setTerminal(false);
-
-			if ($exception instanceof \ModT\Exception\Page404Exception)
-			{
-				$model->setTemplate('error/404');
-			}
-
-			/** @var $response  \Zend\Http\PhpEnvironment\Response */
-			$response = $event->getResponse();
-			$response->setStatusCode(404);
-
-			$event->setResponse($response);
-			$event->setResult($model);
-			return;
+			$this->displayError($event, 403, 'mod3/no_access');
 		}
+		else if ($exception instanceof \ModT\Exception\Page404Exception)
+		{
+			$this->displayError($event, 404, 'error/404');
+		}
+	}
+
+	protected function displayError($event, $status, $template)
+	{
+		$model = new ViewModel();
+		$model->setTerminal(false);
+
+		$model->setTemplate($template);
+
+		/** @var $response  \Zend\Http\PhpEnvironment\Response */
+		$response = $event->getResponse();
+		$response->setStatusCode($status);
+
+		$event->setResponse($response);
+		$event->setResult($model);
+
+		return;
 	}
 }
