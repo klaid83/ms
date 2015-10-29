@@ -13,6 +13,9 @@ class IndexController extends AbstractActionController
 	    $city    = $this->params()->fromRoute('city', 0);
 
 
+
+	    throw new \HttpRuntimeException ;
+
 //	    if (!$id)
 	    {
 //		    $this->flashMessenger()->addErrorMessage('City id doesn\'t set');
