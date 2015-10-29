@@ -15,7 +15,7 @@ class IndexController extends AbstractActionController
 //	    \Zend\Debug\Debug::dump(get_class_methods($this));
 //		$this->exception()->page404();
 //		$this->exception()->accessDeniedAction();
-		$this->exception()->noAccessAction();
+//		$this->exception()->noAccessAction();
 
 //	    throw new \HttpRuntimeException ;
 
