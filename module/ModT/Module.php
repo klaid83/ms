@@ -119,7 +119,7 @@ class Module
 	public function getControllerPluginConfig() {
 		return array(
 			'invokables' => array(
-				'page_exception' => 'ModT\Controller\Plugin\ExceptionPlugin',
+				'exception' => 'ModT\Controller\Plugin\ExceptionPlugin',
 			)
 		);
 	}
