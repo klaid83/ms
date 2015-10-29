@@ -53,5 +53,24 @@ class ExceptionStrategy extends AbstractListenerAggregate
 			$event->setResult($model);
 			return;
 		}
+
+		if ($exception instanceof \ModT\Exception\PageException)
+		{
+			$model = new ViewModel();
+			$model->setTerminal(false);
+
+			if ($exception instanceof \ModT\Exception\Page404Exception)
+			{
+				$model->setTemplate('error/404');
+			}
+
+			/** @var $response  \Zend\Http\PhpEnvironment\Response */
+			$response = $event->getResponse();
+			$response->setStatusCode(404);
+
+			$event->setResponse($response);
+			$event->setResult($model);
+			return;
+		}
 	}
 }

@@ -15,4 +15,10 @@ class ExceptionPlugin extends AbstractPlugin
 	{
 		throw new \ModT\Exception\NoAccessException();
 	}
+
+	public function page404()
+	{
+		throw new \ModT\Exception\Page404Exception();
+	}
+
 }
