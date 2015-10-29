@@ -16,7 +16,7 @@ class Module
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
 		$serviceManager = $e->getApplication()->getServiceManager();
-
+		$eventManager->attachAggregate($serviceLocator->get('Listener.ExceptionStrategy'));
 		$eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function(MvcEvent $event) use ($serviceManager ){
 
 			$exception = $event->getParam('exception');

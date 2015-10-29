@@ -20,7 +20,7 @@ class Module
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach($eventManager);
 
-		$eventManager->attachAggregate($serviceLocator->get('Listener.GuardExceptionStrategy'));
+//		$eventManager->attachAggregate($serviceLocator->get('Listener.GuardExceptionStrategy'));
 		$eventManager->attach($serviceLocator->get('mxc_layoutscheme_service'));
 	}
 

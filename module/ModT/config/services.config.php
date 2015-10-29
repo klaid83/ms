@@ -6,6 +6,7 @@ use Zend\Log\Writer\Stream;
 
 return array(
 		'invokables' => array(
+			'Listener.ExceptionStrategy' => 'ModT\Listener\ExceptionStrategy',
 		),
 		'abstract_factories' => array(),
 		'factories' => array(
