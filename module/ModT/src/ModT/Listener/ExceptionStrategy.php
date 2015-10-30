@@ -9,6 +9,9 @@ use Zend\View\Model\ViewModel,
 
 class ExceptionStrategy extends AbstractListenerAggregate
 {
+	/** @var \Zend\Mvc\MvcEvent $_event */
+	protected $_event;
+
 	/**
 	 * @param  \Zend\EventManager\EventManagerInterface $events
 	 * @return void
@@ -28,23 +31,24 @@ class ExceptionStrategy extends AbstractListenerAggregate
 	 */
 	public function onDispatchError(MvcEvent $event)
 	{
+		$this->_event = $event;
 		$exception = $event->getParam('exception');
 
 		if ($exception instanceof \ModT\Exception\AccessDeniedException)
 		{
-			$this->displayError($event, 403, 'mod3/access_denied');
+			$this->displayError('mod3/access_denied');
 		}
 		else if ($exception instanceof \ModT\Exception\NoAccessException)
 		{
-			$this->displayError($event, 403, 'mod3/no_access');
+			$this->displayError('mod3/no_access');
 		}
 		else if ($exception instanceof \ModT\Exception\Page404Exception)
 		{
-			$this->displayError($event, 404, 'error/404');
+			$this->displayError('error/404', 404);
 		}
 	}
 
-	protected function displayError($event, $status, $template)
+	protected function displayError($template, $status = 403)
 	{
 		$model = new ViewModel();
 		$model->setTerminal(false);
@@ -52,11 +56,11 @@ class ExceptionStrategy extends AbstractListenerAggregate
 		$model->setTemplate($template);
 
 		/** @var $response  \Zend\Http\PhpEnvironment\Response */
-		$response = $event->getResponse();
+		$response = $this->_event->getResponse();
 		$response->setStatusCode($status);
 
-		$event->setResponse($response);
-		$event->setResult($model);
+		$this->_event->setResponse($response);
+		$this->_event->setResult($model);
 
 		return;
 	}
