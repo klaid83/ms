@@ -43,9 +43,15 @@ class IndexController extends AbstractActionController
 //		    )
 //	    );
 //	    $menu_service->initPanelLeft($menu);
+
+	    $countries = $this->getServiceLocator()
+		    ->get('Doctrine\ORM\EntityManager')
+		    ->getRepository('Mod1\Entity\Country')
+		    ->findAll();
+
         return $view_model->setVariables(
 	        array(
-		        'country' => $this->_country
+		        'countries' => $countries
 	        )
         );
     }

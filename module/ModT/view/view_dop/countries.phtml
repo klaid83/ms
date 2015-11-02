@@ -1,1 +1,18 @@
-<?php echo __FILE__; ?>
+<div class="row">
+<?php foreach($this->countries as $country): ?>
+	<div class="col-md-4">
+		<div class="jumbotron">
+			<?php echo $country->getName(); ?>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<?php echo $country->getDescription(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endforeach;?>
+</div>
