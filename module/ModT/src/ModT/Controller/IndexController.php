@@ -19,18 +19,18 @@ class IndexController extends AbstractActionController
     public function indexAction()
     {
 	    $view_model = new ViewModel();
-	    $view_model->setTemplate('modt/countries');
-
-	    $this->_leftMenu();
-
-	    $countries = $this->getServiceLocator()
-		    ->get('Doctrine\ORM\EntityManager')
-		    ->getRepository('Mod1\Entity\Country')
-		    ->findAll();
+//	    $view_model->setTemplate('modt/countries');
+//
+//	    $this->_leftMenu();
+//
+//	    $countries = $this->getServiceLocator()
+//		    ->get('Doctrine\ORM\EntityManager')
+//		    ->getRepository('Mod1\Entity\Country')
+//		    ->findAll();
 
         return $view_model->setVariables(
 	        array(
-		        'countries' => $countries
+//		        'countries' => $countries
 	        )
         );
     }
