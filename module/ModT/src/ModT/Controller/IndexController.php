@@ -52,18 +52,21 @@ class IndexController extends AbstractActionController
 
 	protected function _initMenuCountry()
 	{
+		$countries = $this->getServiceLocator()
+			->get('Doctrine\ORM\EntityManager')
+			->getRepository('Mod1\Entity\Country')
+			->findAll();
+
+		$data = array();
+
+		foreach($countries as $country)
+		{
+			$data[$country->getAllias()] = $country->getName();
+		}
+
 		$this->_left_menu = array(
 				'menu' => array(
-					'menu_title' => 'Country',
-					'menu_country' => 'country',
-					'menu_data' => array(
-					    'russia' => 'Россия',
-					    'strana_1' => 'Страна 1',
-					    'strana_2' => 'Страна 2',
-					    'strana_3' => 'Страна 3',
-					    'strana_4' => 'Страна 4',
-					    'strana_5' => 'Страна 5',
-				    )
+					'menu_data' => $data
 			    ),
 				'type' => 1,
 	        );
@@ -71,18 +74,20 @@ class IndexController extends AbstractActionController
 
 	protected function _initMenuCity()
 	{
+		$cities = $this->_country->getCities();
+
+		$data = array();
+
+		foreach($cities as $city)
+		{
+			$data[$city->getAllias()] = $city->getName();
+		}
+
 		$this->_left_menu = array(
 			'menu' => array(
-			    'menu_title' => 'Country:City',
-				'menu_country' => 'country_city',
-			    'menu_data' => array(
-				    'gorod_1' => 'Город 1',
-				    'gorod_2' => 'Город 2',
-				    'gorod_3' => 'Город 3',
-				    'gorod_4' => 'Город 4',
-				    'gorod_5' => 'Город 5',
-				    'gorod_6' => 'Город 6',
-			    ),
+			    'menu_title' => $this->_country->getName(),
+				'menu_country' => $this->_country->getAllias(),
+			    'menu_data' => $data,
 		    ),
 			'type' => 2,
 	    );

@@ -15,7 +15,7 @@ class MenuCountryHelper extends AbstractHelper
 				<div class="col-md-11">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title"><?php echo $menu['menu_title']; ?></h3>
+							<h3 class="panel-title">Страны</h3>
 						</div>
 						<div class="panel-body">
 							<?php
