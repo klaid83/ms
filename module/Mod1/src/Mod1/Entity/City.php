@@ -42,6 +42,23 @@ class City
 	 */
 	protected $resorts;
 
+	/**
+	 *
+	 * @ORM\Column(name="allias", type="text")
+	 */
+	private $allias;
+
+
+	public function setAllias($allias)
+	{
+		$this->allias = $allias;
+	}
+
+	public function getAllias()
+	{
+		return $this->allias;
+	}
+
 	public function __construct()
 	{
 		$this->resorts = new \Doctrine\Common\Collections\ArrayCollection();

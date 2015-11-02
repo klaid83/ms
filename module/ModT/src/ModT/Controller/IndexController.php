@@ -12,6 +12,32 @@ class IndexController extends AbstractActionController
 	    $country = $this->params()->fromRoute('country', 0);
 	    $city    = $this->params()->fromRoute('city', 0);
 
+	    $country = $this->getServiceLocator()
+		    ->get('Doctrine\ORM\EntityManager')
+		    ->getRepository('Mod1\Entity\Country')
+		    ->findOneByAllias($country);
+
+	    if (!$country)
+	    {
+		    $this->exception()->page404();
+	    }
+
+	    \Zend\Debug\Debug::dump($country->getName(), '$country');
+
+
+
+
+
+
+	    $countryInfo = array();
+
+	    if ($city)
+	    {
+		    // select where $city
+	    }
+
+
+
 //	    \Zend\Debug\Debug::dump(get_class_methods($this));
 //		$this->exception()->page404();
 //		$this->exception()->accessDeniedAction();
@@ -28,8 +54,8 @@ class IndexController extends AbstractActionController
 
 
 
-	    \Zend\Debug\Debug::dump($country);
-	    \Zend\Debug\Debug::dump($city);
+//	    \Zend\Debug\Debug::dump($country);
+//	    \Zend\Debug\Debug::dump($city);
 
 
 

@@ -27,6 +27,12 @@ class Country
 
 	/**
 	 *
+	 * @ORM\Column(name="allias", type="text")
+	 */
+	private $allias;
+
+	/**
+	 *
 	 * @ORM\Column(name="description", type="text")
 	 */
 	private $description;
@@ -40,6 +46,16 @@ class Country
 	public function __construct()
 	{
 		$this->cities = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+
+	public function setAllias($allias)
+	{
+		$this->allias = $allias;
+	}
+
+	public function getAllias()
+	{
+		return $this->allias;
 	}
 
 	public function setCities($cities)
