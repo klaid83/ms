@@ -34,11 +34,7 @@ return array(
 	        'directory' => array(
 		        'type'    => 'segment',
 		        'options' => array(
-			        'route'    => '/directory/[:country[/:city]]',
-			        'constraints' => array(
-				        'country' => '[a-zA-Z][a-zA-Z0-9_-]*',
-				        'city'    => '[a-zA-Z][a-zA-Z0-9_-]*',
-			        ),
+			        'route'    => '/directory/',
 			        'defaults' => array(
 				        '__NAMESPACE__' => 'ModT\Controller',
 				        'controller'    => 'Index',
@@ -46,6 +42,36 @@ return array(
 			        ),
 		        ),
 	        ),
+	        'country' => array(
+		        'type' => 'Zend\Mvc\Router\Http\Segment',
+		        'options' => array(
+			        'route' => '/directory/:country',
+			        'constraints' => array(
+				        'country' => '[a-zA-Z][a-zA-Z0-9_-]*',
+			        ),
+			        'defaults' => array(
+				        '__NAMESPACE__' => 'ModT\Controller',
+				        'controller'    => 'Index',
+				        'action'        => 'country',
+			        )
+		        )
+	        ),
+			'city' => array(
+		        'type' => 'Zend\Mvc\Router\Http\Segment',
+		        'options' => array(
+			        'route' => '/directory/:country/:city',
+			        'constraints' => array(
+				        'country' => '[a-zA-Z][a-zA-Z0-9_-]*',
+				        'city'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+			        ),
+			        'defaults' => array(
+				        '__NAMESPACE__' => 'ModT\Controller',
+				        'controller'    => 'Index',
+				        'action'        => 'city',
+			        )
+		        )
+	        ),
+
         ),
     ),
     'controllers' => array(
@@ -60,6 +86,9 @@ return array(
 		    'modt/panelLeft'       => __DIR__ . '/../view/view_dop/panel_left.phtml',
 		    'modt/panelRight'      => __DIR__ . '/../view/view_dop/panel_right.phtml',
 		    'modt/layout'          => __DIR__ . '/../view/view_dop/layout.phtml',
+		    'modt/countries'       => __DIR__ . '/../view/view_dop/countries.phtml',
+		    'modt/country'         => __DIR__ . '/../view/view_dop/country.phtml',
+		    'modt/city'            => __DIR__ . '/../view/view_dop/city.phtml',
 	    ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
