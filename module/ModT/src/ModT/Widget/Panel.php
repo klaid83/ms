@@ -11,14 +11,17 @@ class Panel extends Widget
 
 	public function init()
 	{
-		echo '<div class="panel panel-primary">';
-		echo '<div class="panel-heading"><span class="glyphicon glyphicon-' . $this->icon . '"></span>' . $this->title . '</div>';
-		echo '<div class="panel-body">';
+		echo Html::beginTag('div',array('class'=>'panel panel-primary'));
+		echo Html::beginTag('div',array('class'=>"panel-heading"));
+		echo Html::tag('span','',array('class'=>'glyphicon glyphicon-' . $this->icon)) . $this->title;
+		echo Html::endTag('div');
+
+		echo Html::beginTag('div',array('class'=>'panel-body'));
 	}
 
 	public function run()
 	{
-		echo '</div>';
-		echo '</div>';
+		echo Html::endTag('div');
+		echo Html::endTag('div');
 	}
 }

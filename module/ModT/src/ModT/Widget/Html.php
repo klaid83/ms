@@ -16,7 +16,7 @@ class Html
 	 * @var array list of void elements (element name => 1)
 	 * @see http://www.w3.org/TR/html-markup/syntax.html#void-element
 	 */
-	public static $voidElements = [
+	public static $voidElements = array(
 		'area' => 1,
 		'base' => 1,
 		'br' => 1,
@@ -33,12 +33,12 @@ class Html
 		'source' => 1,
 		'track' => 1,
 		'wbr' => 1,
-	];
+	);
 	/**
 	 * @var array the preferred order of attributes in a tag. This mainly affects the order of the attributes
 	 * that are rendered by [[renderTagAttributes()]].
 	 */
-	public static $attributeOrder = [
+	public static $attributeOrder = array(
 		'type',
 		'id',
 		'class',
@@ -63,7 +63,7 @@ class Html
 		'title',
 		'rel',
 		'media',
-	];
+	);
 	/**
 	 * Encodes special characters into HTML entities.
 	 * The [[\yii\base\Application::charset|application charset]] will be used for encoding.
@@ -108,7 +108,7 @@ class Html
 	 * @see beginTag()
 	 * @see endTag()
 	 */
-	public static function tag($name, $content = '', $options = [])
+	public static function tag($name, $content = '', $options = array())
 	{
 		$html = "<$name" . static::renderTagAttributes($options) . '>';
 		return isset(static::$voidElements[strtolower($name)]) ? $html : "$html$content</$name>";
@@ -124,7 +124,7 @@ class Html
 	 * @see endTag()
 	 * @see tag()
 	 */
-	public static function beginTag($name, $options = [])
+	public static function beginTag($name, $options = array())
 	{
 		return "<$name" . static::renderTagAttributes($options) . '>';
 	}
@@ -149,7 +149,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated style tag
 	 */
-	public static function style($content, $options = [])
+	public static function style($content, $options = array())
 	{
 		return static::tag('style', $content, $options);
 	}
@@ -163,7 +163,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated script tag
 	 */
-	public static function script($content, $options = [])
+	public static function script($content, $options = array())
 	{
 		return static::tag('script', $content, $options);
 	}
@@ -177,7 +177,7 @@ class Html
 	 * @return string the generated link tag
 	 * @see \yii\helpers\Url::to()
 	 */
-	public static function cssFile($url, $options = [])
+	public static function cssFile($url, $options = array())
 	{
 		if (!isset($options['rel'])) {
 			$options['rel'] = 'stylesheet';
@@ -195,7 +195,7 @@ class Html
 	 * @return string the generated script tag
 	 * @see \yii\helpers\Url::to()
 	 */
-	public static function jsFile($url, $options = [])
+	public static function jsFile($url, $options = array())
 	{
 		$options['src'] = Url::to($url);
 		return static::tag('script', '', $options);
@@ -214,10 +214,10 @@ class Html
 	 * @return string the generated form start tag.
 	 * @see endForm()
 	 */
-	public static function beginForm($action = '', $method = 'post', $options = [])
+	public static function beginForm($action = '', $method = 'post', $options = array())
 	{
 		$action = Url::to($action);
-		$hiddenInputs = [];
+		$hiddenInputs = array();
 		$request = Yii::$app->getRequest();
 		if ($request instanceof Request) {
 			if (strcasecmp($method, 'get') && strcasecmp($method, 'post')) {
@@ -276,7 +276,7 @@ class Html
 	 * @return string the generated hyperlink
 	 * @see yii\helpers\Url::to()
 	 */
-	public static function a($text, $url = null, $options = [])
+	public static function a($text, $url = null, $options = array())
 	{
 		if ($url !== null) {
 			$options['href'] = Url::to($url);
@@ -296,7 +296,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated mailto link
 	 */
-	public static function mailto($text, $email = null, $options = [])
+	public static function mailto($text, $email = null, $options = array())
 	{
 		$options['href'] = 'mailto:' . ($email === null ? $text : $email);
 		return static::tag('a', $text, $options);
@@ -310,7 +310,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated image tag
 	 */
-	public static function img($src, $options = [])
+	public static function img($src, $options = array())
 	{
 		$options['src'] = Url::to($src);
 		if (!isset($options['alt'])) {
@@ -331,7 +331,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated label tag
 	 */
-	public static function label($content, $for = null, $options = [])
+	public static function label($content, $for = null, $options = array())
 	{
 		$options['for'] = $for;
 		return static::tag('label', $content, $options);
@@ -347,7 +347,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated button tag
 	 */
-	public static function button($content = 'Button', $options = [])
+	public static function button($content = 'Button', $options = array())
 	{
 		return static::tag('button', $content, $options);
 	}
@@ -362,7 +362,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated submit button tag
 	 */
-	public static function submitButton($content = 'Submit', $options = [])
+	public static function submitButton($content = 'Submit', $options = array())
 	{
 		$options['type'] = 'submit';
 		return static::button($content, $options);
@@ -378,7 +378,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated reset button tag
 	 */
-	public static function resetButton($content = 'Reset', $options = [])
+	public static function resetButton($content = 'Reset', $options = array())
 	{
 		$options['type'] = 'reset';
 		return static::button($content, $options);
@@ -394,7 +394,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated input tag
 	 */
-	public static function input($type, $name = null, $value = null, $options = [])
+	public static function input($type, $name = null, $value = null, $options = array())
 	{
 		$options['type'] = $type;
 		$options['name'] = $name;
@@ -410,7 +410,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated button tag
 	 */
-	public static function buttonInput($label = 'Button', $options = [])
+	public static function buttonInput($label = 'Button', $options = array())
 	{
 		$options['type'] = 'button';
 		$options['value'] = $label;
@@ -425,7 +425,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated button tag
 	 */
-	public static function submitInput($label = 'Submit', $options = [])
+	public static function submitInput($label = 'Submit', $options = array())
 	{
 		$options['type'] = 'submit';
 		$options['value'] = $label;
@@ -439,7 +439,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated button tag
 	 */
-	public static function resetInput($label = 'Reset', $options = [])
+	public static function resetInput($label = 'Reset', $options = array())
 	{
 		$options['type'] = 'reset';
 		$options['value'] = $label;
@@ -455,7 +455,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated button tag
 	 */
-	public static function textInput($name, $value = null, $options = [])
+	public static function textInput($name, $value = null, $options = array())
 	{
 		return static::input('text', $name, $value, $options);
 	}
@@ -469,7 +469,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated button tag
 	 */
-	public static function hiddenInput($name, $value = null, $options = [])
+	public static function hiddenInput($name, $value = null, $options = array())
 	{
 		return static::input('hidden', $name, $value, $options);
 	}
@@ -483,7 +483,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated button tag
 	 */
-	public static function passwordInput($name, $value = null, $options = [])
+	public static function passwordInput($name, $value = null, $options = array())
 	{
 		return static::input('password', $name, $value, $options);
 	}
@@ -500,7 +500,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated button tag
 	 */
-	public static function fileInput($name, $value = null, $options = [])
+	public static function fileInput($name, $value = null, $options = array())
 	{
 		return static::input('file', $name, $value, $options);
 	}
@@ -514,7 +514,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated text area tag
 	 */
-	public static function textarea($name, $value = '', $options = [])
+	public static function textarea($name, $value = '', $options = array())
 	{
 		$options['name'] = $name;
 		return static::tag('textarea', static::encode($value), $options);
@@ -542,7 +542,7 @@ class Html
 	 *
 	 * @return string the generated radio button tag
 	 */
-	public static function radio($name, $checked = false, $options = [])
+	public static function radio($name, $checked = false, $options = array())
 	{
 		$options['checked'] = (boolean)$checked;
 		$value = array_key_exists('value', $options) ? $options['value'] : '1';
@@ -555,8 +555,8 @@ class Html
 		}
 		if (isset($options['label'])) {
 			$label = $options['label'];
-			$labelOptions = isset($options['labelOptions']) ? $options['labelOptions'] : [];
-			$container = isset($options['container']) ? $options['container'] : ['class' => 'radio'];
+			$labelOptions = isset($options['labelOptions']) ? $options['labelOptions'] : array();
+			$container = isset($options['container']) ? $options['container'] : array('class' => 'radio');
 			unset($options['label'], $options['labelOptions'], $options['container']);
 			$content = static::label(static::input('radio', $name, $value, $options) . ' ' . $label, null, $labelOptions);
 			if (is_array($container)) {
@@ -591,7 +591,7 @@ class Html
 	 *
 	 * @return string the generated checkbox tag
 	 */
-	public static function checkbox($name, $checked = false, $options = [])
+	public static function checkbox($name, $checked = false, $options = array())
 	{
 		$options['checked'] = (boolean)$checked;
 		$value = array_key_exists('value', $options) ? $options['value'] : '1';
@@ -604,8 +604,8 @@ class Html
 		}
 		if (isset($options['label'])) {
 			$label = $options['label'];
-			$labelOptions = isset($options['labelOptions']) ? $options['labelOptions'] : [];
-			$container = isset($options['container']) ? $options['container'] : ['class' => 'checkbox'];
+			$labelOptions = isset($options['labelOptions']) ? $options['labelOptions'] : array();
+			$container = isset($options['container']) ? $options['container'] : array('class' => 'checkbox');
 			unset($options['label'], $options['labelOptions'], $options['container']);
 			$content = static::label(static::input('checkbox', $name, $value, $options) . ' ' . $label, null, $labelOptions);
 			if (is_array($container)) {
@@ -651,7 +651,7 @@ class Html
 	 *
 	 * @return string the generated drop-down list tag
 	 */
-	public static function dropDownList($name, $selection = null, $items = [], $options = [])
+	public static function dropDownList($name, $selection = null, $items = array(), $options = array())
 	{
 		if (!empty($options['multiple'])) {
 			return static::listBox($name, $selection, $items, $options);
@@ -697,7 +697,7 @@ class Html
 	 *
 	 * @return string the generated list box tag
 	 */
-	public static function listBox($name, $selection = null, $items = [], $options = [])
+	public static function listBox($name, $selection = null, $items = array(), $options = array())
 	{
 		if (!array_key_exists('size', $options)) {
 			$options['size'] = 4;
@@ -752,15 +752,15 @@ class Html
 	 *
 	 * @return string the generated checkbox list
 	 */
-	public static function checkboxList($name, $selection = null, $items = [], $options = [])
+	public static function checkboxList($name, $selection = null, $items = array(), $options = array())
 	{
 		if (substr($name, -2) !== '[]') {
 			$name .= '[]';
 		}
 		$formatter = isset($options['item']) ? $options['item'] : null;
-		$itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
+		$itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : array();
 		$encode = !isset($options['encode']) || $options['encode'];
-		$lines = [];
+		$lines = array();
 		$index = 0;
 		foreach ($items as $value => $label) {
 			$checked = $selection !== null &&
@@ -769,10 +769,10 @@ class Html
 			if ($formatter !== null) {
 				$lines[] = call_user_func($formatter, $index, $label, $name, $checked, $value);
 			} else {
-				$lines[] = static::checkbox($name, $checked, array_merge($itemOptions, [
+				$lines[] = static::checkbox($name, $checked, array_merge($itemOptions, array(
 					'value' => $value,
 					'label' => $encode ? static::encode($label) : $label,
-				]));
+				)));
 			}
 			$index++;
 		}
@@ -818,12 +818,12 @@ class Html
 	 *
 	 * @return string the generated radio button list
 	 */
-	public static function radioList($name, $selection = null, $items = [], $options = [])
+	public static function radioList($name, $selection = null, $items = array(), $options = array())
 	{
 		$encode = !isset($options['encode']) || $options['encode'];
 		$formatter = isset($options['item']) ? $options['item'] : null;
-		$itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
-		$lines = [];
+		$itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : array();
+		$lines = array();
 		$index = 0;
 		foreach ($items as $value => $label) {
 			$checked = $selection !== null &&
@@ -832,10 +832,10 @@ class Html
 			if ($formatter !== null) {
 				$lines[] = call_user_func($formatter, $index, $label, $name, $checked, $value);
 			} else {
-				$lines[] = static::radio($name, $checked, array_merge($itemOptions, [
+				$lines[] = static::radio($name, $checked, array_merge($itemOptions, array(
 					'value' => $value,
 					'label' => $encode ? static::encode($label) : $label,
-				]));
+				)));
 			}
 			$index++;
 		}
@@ -873,7 +873,7 @@ class Html
 	 *
 	 * @return string the generated unordered list. An empty string is returned if `$items` is empty.
 	 */
-	public static function ul($items, $options = [])
+	public static function ul($items, $options = array())
 	{
 		if (empty($items)) {
 			return '';
@@ -881,9 +881,9 @@ class Html
 		$tag = isset($options['tag']) ? $options['tag'] : 'ul';
 		$encode = !isset($options['encode']) || $options['encode'];
 		$formatter = isset($options['item']) ? $options['item'] : null;
-		$itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
+		$itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : array();
 		unset($options['tag'], $options['encode'], $options['item'], $options['itemOptions']);
-		$results = [];
+		$results = array();
 		foreach ($items as $index => $item) {
 			if ($formatter !== null) {
 				$results[] = call_user_func($formatter, $item, $index);
@@ -916,7 +916,7 @@ class Html
 	 *
 	 * @return string the generated ordered list. An empty string is returned if `$items` is empty.
 	 */
-	public static function ol($items, $options = [])
+	public static function ol($items, $options = array())
 	{
 		$options['tag'] = 'ol';
 		return static::ul($items, $options);
@@ -940,7 +940,7 @@ class Html
 	 *
 	 * @return string the generated label tag
 	 */
-	public static function activeLabel($model, $attribute, $options = [])
+	public static function activeLabel($model, $attribute, $options = array())
 	{
 		$for = array_key_exists('for', $options) ? $options['for'] : static::getInputId($model, $attribute);
 		$attribute = static::getAttributeName($attribute);
@@ -965,7 +965,7 @@ class Html
 	 *
 	 * @return string the generated label tag
 	 */
-	public static function error($model, $attribute, $options = [])
+	public static function error($model, $attribute, $options = array())
 	{
 		$attribute = static::getAttributeName($attribute);
 		$error = $model->getFirstError($attribute);
@@ -986,7 +986,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated input tag
 	 */
-	public static function activeInput($type, $model, $attribute, $options = [])
+	public static function activeInput($type, $model, $attribute, $options = array())
 	{
 		$name = isset($options['name']) ? $options['name'] : static::getInputName($model, $attribute);
 		$value = isset($options['value']) ? $options['value'] : static::getAttributeValue($model, $attribute);
@@ -1007,7 +1007,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated input tag
 	 */
-	public static function activeTextInput($model, $attribute, $options = [])
+	public static function activeTextInput($model, $attribute, $options = array())
 	{
 		return static::activeInput('text', $model, $attribute, $options);
 	}
@@ -1023,7 +1023,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated input tag
 	 */
-	public static function activeHiddenInput($model, $attribute, $options = [])
+	public static function activeHiddenInput($model, $attribute, $options = array())
 	{
 		return static::activeInput('hidden', $model, $attribute, $options);
 	}
@@ -1039,7 +1039,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated input tag
 	 */
-	public static function activePasswordInput($model, $attribute, $options = [])
+	public static function activePasswordInput($model, $attribute, $options = array())
 	{
 		return static::activeInput('password', $model, $attribute, $options);
 	}
@@ -1055,11 +1055,11 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated input tag
 	 */
-	public static function activeFileInput($model, $attribute, $options = [])
+	public static function activeFileInput($model, $attribute, $options = array())
 	{
 		// add a hidden field so that if a model only has a file field, we can
 		// still use isset($_POST[$modelClass]) to detect if the input is submitted
-		return static::activeHiddenInput($model, $attribute, ['id' => null, 'value' => ''])
+		return static::activeHiddenInput($model, $attribute, array('id' => null, 'value' => ''))
 			. static::activeInput('file', $model, $attribute, $options);
 	}
 	/**
@@ -1073,7 +1073,7 @@ class Html
 	 * See [[renderTagAttributes()]] for details on how attributes are being rendered.
 	 * @return string the generated textarea tag
 	 */
-	public static function activeTextarea($model, $attribute, $options = [])
+	public static function activeTextarea($model, $attribute, $options = array())
 	{
 		$name = isset($options['name']) ? $options['name'] : static::getInputName($model, $attribute);
 		$value = static::getAttributeValue($model, $attribute);
@@ -1106,7 +1106,7 @@ class Html
 	 *
 	 * @return string the generated radio button tag
 	 */
-	public static function activeRadio($model, $attribute, $options = [])
+	public static function activeRadio($model, $attribute, $options = array())
 	{
 		$name = isset($options['name']) ? $options['name'] : static::getInputName($model, $attribute);
 		$value = static::getAttributeValue($model, $attribute);
@@ -1145,7 +1145,7 @@ class Html
 	 *
 	 * @return string the generated checkbox tag
 	 */
-	public static function activeCheckbox($model, $attribute, $options = [])
+	public static function activeCheckbox($model, $attribute, $options = array())
 	{
 		$name = isset($options['name']) ? $options['name'] : static::getInputName($model, $attribute);
 		$value = static::getAttributeValue($model, $attribute);
@@ -1197,7 +1197,7 @@ class Html
 	 *
 	 * @return string the generated drop-down list tag
 	 */
-	public static function activeDropDownList($model, $attribute, $items, $options = [])
+	public static function activeDropDownList($model, $attribute, $items, $options = array())
 	{
 		if (!empty($options['multiple'])) {
 			return static::activeListBox($model, $attribute, $items, $options);
@@ -1248,7 +1248,7 @@ class Html
 	 *
 	 * @return string the generated list box tag
 	 */
-	public static function activeListBox($model, $attribute, $items, $options = [])
+	public static function activeListBox($model, $attribute, $items, $options = array())
 	{
 		$name = isset($options['name']) ? $options['name'] : static::getInputName($model, $attribute);
 		$selection = static::getAttributeValue($model, $attribute);
@@ -1292,7 +1292,7 @@ class Html
 	 *
 	 * @return string the generated checkbox list
 	 */
-	public static function activeCheckboxList($model, $attribute, $items, $options = [])
+	public static function activeCheckboxList($model, $attribute, $items, $options = array())
 	{
 		$name = isset($options['name']) ? $options['name'] : static::getInputName($model, $attribute);
 		$selection = static::getAttributeValue($model, $attribute);
@@ -1335,7 +1335,7 @@ class Html
 	 *
 	 * @return string the generated radio button list
 	 */
-	public static function activeRadioList($model, $attribute, $items, $options = [])
+	public static function activeRadioList($model, $attribute, $items, $options = array())
 	{
 		$name = isset($options['name']) ? $options['name'] : static::getInputName($model, $attribute);
 		$selection = static::getAttributeValue($model, $attribute);
@@ -1365,25 +1365,25 @@ class Html
 	 *
 	 * @return string the generated list options
 	 */
-	public static function renderSelectOptions($selection, $items, &$tagOptions = [])
+	public static function renderSelectOptions($selection, $items, &$tagOptions = array())
 	{
-		$lines = [];
+		$lines = array();
 		if (isset($tagOptions['prompt'])) {
 			$prompt = str_replace(' ', '&nbsp;', static::encode($tagOptions['prompt']));
-			$lines[] = static::tag('option', $prompt, ['value' => '']);
+			$lines[] = static::tag('option', $prompt, array('value' => ''));
 		}
-		$options = isset($tagOptions['options']) ? $tagOptions['options'] : [];
-		$groups = isset($tagOptions['groups']) ? $tagOptions['groups'] : [];
+		$options = isset($tagOptions['options']) ? $tagOptions['options'] : array();
+		$groups = isset($tagOptions['groups']) ? $tagOptions['groups'] : array();
 		unset($tagOptions['prompt'], $tagOptions['options'], $tagOptions['groups']);
 		foreach ($items as $key => $value) {
 			if (is_array($value)) {
-				$groupAttrs = isset($groups[$key]) ? $groups[$key] : [];
+				$groupAttrs = isset($groups[$key]) ? $groups[$key] : array();
 				$groupAttrs['label'] = $key;
-				$attrs = ['options' => $options, 'groups' => $groups];
+				$attrs = array('options' => $options, 'groups' => $groups);
 				$content = static::renderSelectOptions($selection, $value, $attrs);
 				$lines[] = static::tag('optgroup', "\n" . $content . "\n", $groupAttrs);
 			} else {
-				$attrs = isset($options[$key]) ? $options[$key] : [];
+				$attrs = isset($options[$key]) ? $options[$key] : array();
 				$attrs['value'] = (string)$key;
 				$attrs['selected'] = $selection !== null &&
 					(!is_array($selection) && !strcmp($key, $selection)
@@ -1416,7 +1416,7 @@ class Html
 	public static function renderTagAttributes($attributes)
 	{
 		if (count($attributes) > 1) {
-			$sorted = [];
+			$sorted = array();
 			foreach (static::$attributeOrder as $name) {
 				if (isset($attributes[$name])) {
 					$sorted[$name] = $attributes[$name];
@@ -1579,7 +1579,7 @@ class Html
 	 */
 	public static function cssStyleToArray($style)
 	{
-		$result = [];
+		$result = array();
 		foreach (explode(';', $style) as $property) {
 			$property = explode(':', $property);
 			if (count($property) > 1) {
@@ -1702,6 +1702,6 @@ class Html
 	public static function getInputId($model, $attribute)
 	{
 		$name = strtolower(static::getInputName($model, $attribute));
-		return str_replace(['[]', '][', '[', ']', ' '], ['', '-', '-', '', '-'], $name);
+		return str_replace(array('[]', '][', '[', ']', ' '), array('', '-', '-', '', '-'), $name);
 	}
 }
