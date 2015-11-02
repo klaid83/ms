@@ -1,13 +1,15 @@
 <?php
 
-	if (isset($this->vars['menu_country']))
+	if (isset($this->type))
 	{
-		echo $this->menu_country_helper($this->vars['menu_country']);
-	}
-
-	if (isset($this->vars['menu_city']))
-	{
-		echo $this->menu_city_helper($this->vars['menu_city']);
+		if ($this->type == 2)
+		{
+			echo $this->menu_city_helper($this->menu);
+		}
+		else if ($this->type == 1)
+		{
+			echo $this->menu_country_helper($this->menu);
+		}
 	}
 
 ?>

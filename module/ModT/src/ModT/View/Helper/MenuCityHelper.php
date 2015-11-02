@@ -15,15 +15,15 @@ class MenuCityHelper extends AbstractHelper
 				<div class="col-md-11">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Cities</h3>
+							<h3 class="panel-title"><?php echo $menu['menu_title']; ?></h3>
 						</div>
 						<div class="panel-body">
 							<?php
 								echo '<ul>';
-								foreach($menu as $k=>$v)
+								foreach($menu['menu_data'] as $k=>$v)
 								{
 									echo '<li>'
-										. '<a href="/city/' . $k . '" >'
+										. '<a href="/directory/' . $menu['menu_country'] . '/' . $k . '" >'
 										. $v
 										. '</a>'
 										. '</li>';
