@@ -71,12 +71,23 @@ return array(
 			        )
 		        )
 	        ),
-
+	        'city_form' => array(
+		        'type' => 'Zend\Mvc\Router\Http\Segment',
+		        'options' => array(
+			        'route' => '/city_form/',
+			        'defaults' => array(
+				        '__NAMESPACE__' => 'ModT\Controller',
+				        'controller'    => 'City',
+				        'action'        => 'index',
+			        )
+		        )
+	        ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'ModT\Controller\Index' => 'ModT\Controller\IndexController'
+            'ModT\Controller\Index' => 'ModT\Controller\IndexController',
+            'ModT\Controller\City' => 'ModT\Controller\CityController',
         ),
     ),
     'view_manager' => array(
