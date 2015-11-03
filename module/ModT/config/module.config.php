@@ -82,12 +82,27 @@ return array(
 			        )
 		        )
 	        ),
+	        'post' => array(
+		        'type' => 'segment',
+		        'options' => array(
+			        'route' => '/post[/:action][/:id]',
+			        'constraints' => array(
+				        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+				        'id' => '[0-9]+',
+			        ),
+			        'defaults' => array(
+				        'controller' => 'ModT\Controller\Post',
+				        'action' => 'index',
+			        ),
+		        ),
+	        ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'ModT\Controller\Index' => 'ModT\Controller\IndexController',
             'ModT\Controller\City' => 'ModT\Controller\CityController',
+            'ModT\Controller\Post' => 'ModT\Controller\PostController',
         ),
     ),
     'view_manager' => array(
