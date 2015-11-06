@@ -112,6 +112,11 @@ class Module
 					$helper = new View\Helper\MenuCityHelper ;
 					return $helper;
 				},
+				'menu' => function ($helperPluginManager){
+					$helper = new View\Helper\Menu();
+					$helper->setServiceManager($helperPluginManager->getServiceLocator());
+					return $helper;
+				},
 			)
 		);
 	}

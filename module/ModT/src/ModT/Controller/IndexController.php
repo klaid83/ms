@@ -139,7 +139,7 @@ class IndexController extends AbstractActionController
 
 		$view_model = new ViewModel();
 		$view_model->setTemplate('modt/country');
-		$this->_leftMenu();
+//		$this->_leftMenu();
 		return $view_model->setVariables(
 			array(
 				'country' => $this->_country,
@@ -163,7 +163,7 @@ class IndexController extends AbstractActionController
 
 		$view_model = new ViewModel();
 		$view_model->setTemplate('modt/city');
-		$this->_leftMenu();
+//		$this->_leftMenu();
 		return $view_model->setVariables(
 			array(
 				'country' => $this->_country,
