@@ -11,16 +11,6 @@ class Menu extends AbstractHelper
 	 */
 	protected $serviceManager;
 
-//	/**
-//	 * @var \Rusal\Service\CurrentUser
-//	 */
-//	protected $currentUser;
-//
-//	/**
-//	 * @var \Rusal\Entity\Procedure
-//	 */
-//	protected $procedure;
-
 
 	/**
 	 * @var string
@@ -93,7 +83,7 @@ class Menu extends AbstractHelper
 	 */
 	protected function renderTopMenu()
 	{
-		echo "<div class='simple-tabs-bar rusal_top_menu' style='margin-bottom: -2px;'>";
+		echo "<div class='simple-tabs-bar' style='margin-bottom: -2px;'>";
 		$this->renderCommonTopMenuItem($this->getCurrentPage());
 		$this->renderProposalTopMenuItem($this->getCurrentPage());
 		$this->renderProtocolTopMenuItem($this->getCurrentPage());
@@ -106,7 +96,7 @@ class Menu extends AbstractHelper
 	protected function renderBottomMenu()
 	{
 		$page = $this->getCurrentPage();
-		echo "<div class='simple-tabs-bar rusal_top_menu' style='margin-bottom: -2px;'>";
+		echo "<div class='simple-tabs-bar' style='margin-bottom: -2px;'>";
 		if($page === 'ranking')
 		{
 			$this->renderRankingMenu();
