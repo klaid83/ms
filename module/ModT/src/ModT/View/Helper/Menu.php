@@ -130,17 +130,13 @@ class Menu extends AbstractHelper
 	{
 		$page = $this->getCurrentPage();
 		echo "<div class='simple-tabs-bar' style='margin-bottom: -2px;'>";
-		if($page === 'ranking')
+		if($page === 'page1')
 		{
-			$this->renderRankingMenu();
+			$this->renderOneMenu();
 		}
-		elseif($page !== 'proposalIndex' && $page !== 'proposalAddByPosition')
+		elseif($page !== 'page2')
 		{
 			$this->renderCommonMenu();
-		}
-		elseif ($page !== 'protocolList')
-		{
-			$this->renderProposalMenu();
 		}
 		echo "</div>";
 	}
@@ -176,25 +172,13 @@ class Menu extends AbstractHelper
 		}
 	}
 
-
-	/**
-	 * Renders submenu for proposal section
-	 */
-	protected function renderProposalMenu()
-	{
-		$byCustomerAnchor = $this->barItemLink('/renderProposalMenu/1', 'Подача предложений по заказчику');
-		echo $this->barItemLink($byCustomerAnchor, $this->getCurrentPage() === 'proposalAddByCustomer');
-		$byPositionAnchor = $this->barItemLink('/renderProposalMenu/2', 'Подача предложений по позиции');
-		echo $this->barItemLink($byPositionAnchor, $this->getCurrentPage() === 'proposalAddByPosition');
-	}
-
 	/**
 	 * Renders submenu
 	 */
-	protected function renderRankingMenu()
+	protected function renderOneMenu()
 	{
-		$anchor = $this->barItemLink('/renderRankingMenu/1', 'Оценка предложений');
-		echo $this->menuDiv($anchor, $this->getCurrentPage() === 'ranking');
+		$anchor = $this->barItemLink('/renderOneMenu/1', 'renderOneMenu');
+		echo $this->menuDiv($anchor, $this->getCurrentPage() === 'page1');
 	}
 
 
@@ -203,7 +187,7 @@ class Menu extends AbstractHelper
 	 */
 	protected function renderCommonMenu()
 	{
-		$visibility = 74;
+		$visibility = 3;
 
 		$tabs = $this->getTabsToShow($visibility);
 
@@ -211,35 +195,20 @@ class Menu extends AbstractHelper
 		{
 			switch($tab){
 				case 'common':
-					$anchor = $this->barItemLink('/view/common/', 'Общая информация');
+					$anchor = $this->barItemLink('/common/', 'common');
 					echo $this->menuDiv($anchor, $this->getCurrentPage() === $tab);
 					break;
 				case 'docs':
-					$anchor = $this->barItemLink('/view/docs/', 'Документация по процедуре');
+					$anchor = $this->barItemLink('/docs/', 'docs');
 					echo $this->menuDiv($anchor, $this->getCurrentPage() === $tab);
 					break;
-				case 'firms':
-					$anchor = $this->barItemLink('/view/firms/', 'Заказчики');
-					echo $this->menuDiv($anchor, $this->getCurrentPage() === $tab);
-					break;
-				case 'lots':
-					$anchor = $this->barItemLink('/view/lots/', 'Лоты');
-					echo $this->menuDiv($anchor, $this->getCurrentPage() === $tab);
-					break;
-				case 'stages':
-					$anchor = $this->barItemLink('/view/stages/', 'Порядок проведения');
+				case 'page':
+					$anchor = $this->barItemLink('/page/', 'page');
 					echo $this->menuDiv($anchor, $this->getCurrentPage() === $tab);
 					break;
 			}
 		}
 	}
-
-
-
-
-
-
-
 
 	/**
 	 * Какие вкладки показывать при просмотре
@@ -248,15 +217,15 @@ class Menu extends AbstractHelper
 	 */
 	public function getTabsToShow($visibility)
 	{
-		if($visibility === 74)
+		if($visibility === 1)
 		{
 			return $this->getAllTabs();
 		}
-		elseif($visibility === 73)
+		elseif($visibility === 2)
 		{
 			return array(
 				'common',
-				'lots',
+				'docs',
 			);
 		}
 		else
@@ -270,9 +239,7 @@ class Menu extends AbstractHelper
 		return array(
 			'common',
 			'docs',
-			'firms',
-			'lots',
-			'stages',
+			'page',
 		);
 	}
 }
