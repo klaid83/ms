@@ -11,12 +11,10 @@ class Menu extends AbstractHelper
 	 */
 	protected $serviceManager;
 
-
 	/**
 	 * @var string
 	 */
 	protected $currentPage;
-
 
 	/**
 	 * @var array
@@ -44,23 +42,21 @@ class Menu extends AbstractHelper
 		$this->renderMenu();
 	}
 
+	/**
+	 * @param mixed $currentPage
+	 */
+	public function setCurrentPage($currentPage)
+	{
+		$this->currentPage = $currentPage;
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/**
+	 * @return mixed
+	 */
+	public function getCurrentPage()
+	{
+		return $this->currentPage;
+	}
 
 	/**
 	 * @return \Zend\ServiceManager\ServiceManager
@@ -79,14 +75,51 @@ class Menu extends AbstractHelper
 	}
 
 	/**
+	 * Returns string which contains right <a> tag
+	 * @param $link
+	 * @param $name
+	 * @return string
+	 */
+	protected function barItemLink($link, $name)
+	{
+		return "<a href='$link'>$name</a>";
+	}
+
+	/**
+	 * Wraps content specified in param to menuDiv
+	 * @param $content string
+	 * @param bool $active
+	 * @return string
+	 */
+	protected function menuDiv($content, $active = false)
+	{
+		if($active === true)
+		{
+			return "<div class='simple-tabs-bar-item current'>$content</div>";
+		}
+		else
+		{
+			return "<div class='simple-tabs-bar-item'>$content</div>";
+		}
+	}
+
+	/**
+	 * Renders full menu
+	 */
+	protected function renderMenu()
+	{
+		$this->renderTopMenu();
+		$this->renderBottomMenu();
+	}
+
+	/**
 	 * Renders top menu
 	 */
 	protected function renderTopMenu()
 	{
 		echo "<div class='simple-tabs-bar' style='margin-bottom: -2px;'>";
-		$this->renderCommonTopMenuItem($this->getCurrentPage());
-		$this->renderProposalTopMenuItem($this->getCurrentPage());
-		$this->renderProtocolTopMenuItem($this->getCurrentPage());
+		$this->renderOneTopMenuItem($this->getCurrentPage());
+		$this->renderTwoTopMenuItem($this->getCurrentPage());
 		echo "</div>";
 	}
 
@@ -115,71 +148,31 @@ class Menu extends AbstractHelper
 	/**
 	 * Renders menu item
 	 */
-	protected function renderProposalTopMenuItem()
+	protected function renderOneTopMenuItem()
 	{
-		$page = $this->getCurrentPage();
-//		$user = $this->getCurrentUser();
-		$isOwner = true;//$user->isOrganizer($this->getProcedure()->getId());
-		$active = ($page == 'proposalIndex' || $page == 'proposalAddByPosition');
-
-		if($isOwner)
-		{
-			$anchor = $this->barItemLink('/renderProposalTopMenuItem/1', 'Заявки');
-			echo $this->menuDiv($anchor, $active);
-		}
-		else
-		{
-			$anchor = $this->barItemLink('/renderProposalTopMenuItem/2', 'Заявки');
-			echo $this->menuDiv($anchor, $active);
-		}
-	}
-
-	/**
-	 * Renders menu item
-	 */
-	protected function renderCommonTopMenuItem()
-	{
-		$anchor = $this->barItemLink('/renderCommonTopMenuItem/1', 'Извещение');
-		$isActive = $this->getCurrentPage() === 'common' || $this->getCurrentPage() === 'lots';
+		$anchor = $this->barItemLink('/renderOneTopMenuItem/1', 'LINK 1');
+		$isActive = $this->getCurrentPage() === 'common';
 		echo $this->menuDiv($anchor, $isActive);
 	}
 
 	/**
 	 * Renders menu item
 	 */
-	protected function renderProtocolTopMenuItem()
+	protected function renderTwoTopMenuItem()
 	{
-		$anchor = $this->barItemLink('/renderProtocolTopMenuItem/', 'Протоколы');
-		echo $this->menuDiv($anchor, $this->getCurrentPage() === 'protocolList');
-	}
+		$page = $this->getCurrentPage();
 
-	/**
-	 * Returns string which contains right <a> tag
-	 * @param $link
-	 * @param $name
-	 * @return string
-	 */
-	protected function barItemLink($link, $name)
-	{
-		return "<a href='$link'>$name</a>";
-	}
+		$active = ($page == 'common' || $page == 'common1');
 
-
-	/**
-	 * Wraps content specified in param to menuDiv
-	 * @param $content string
-	 * @param bool $active
-	 * @return string
-	 */
-	protected function menuDiv($content, $active = false)
-	{
-		if($active === true)
+		if(true)
 		{
-			return "<div class='simple-tabs-bar-item current'>$content</div>";
+			$anchor = $this->barItemLink('/renderTwoTopMenuItem/1', 'LINK 2 1');
+			echo $this->menuDiv($anchor, $active);
 		}
 		else
 		{
-			return "<div class='simple-tabs-bar-item'>$content</div>";
+			$anchor = $this->barItemLink('/renderTwoTopMenuItem/2', 'LINK 2 2');
+			echo $this->menuDiv($anchor, $active);
 		}
 	}
 
@@ -241,31 +234,10 @@ class Menu extends AbstractHelper
 		}
 	}
 
-	/**
-	 * Renders full menu
-	 */
-	protected function renderMenu()
-	{
-		$this->renderTopMenu();
-		$this->renderBottomMenu();
-	}
 
 
-	/**
-	 * @param mixed $currentPage
-	 */
-	public function setCurrentPage($currentPage)
-	{
-		$this->currentPage = $currentPage;
-	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getCurrentPage()
-	{
-		return $this->currentPage;
-	}
+
 
 
 
