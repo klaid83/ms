@@ -10,3 +10,25 @@
 	Here my content
 
 <?php Panel::end() ?>
+
+<?php
+
+ $css_class = $this->currentRoute()->matchModule('admin') ? 'selected' : ''; ?>
+	<a href="/admin" class="<?php echo $css_class;?>">
+		Admin link
+	</a>
+<?php
+/*
+	// get current route info
+	\Zend\Debug\Debug::dump($this->currentRoute()->getController());               // return current controller name
+	\Zend\Debug\Debug::dump($this->currentRoute()->getAction());                   // return current action name
+	\Zend\Debug\Debug::dump($this->currentRoute()->getModule());                   // return current module name
+	\Zend\Debug\Debug::dump($this->currentRoute()->getRoute());                    // return current route name
+
+	// or simply check with current info
+	\Zend\Debug\Debug::dump($this->currentRoute()->matchController('index'));      // match "index" with current controller name
+	\Zend\Debug\Debug::dump($this->currentRoute()->matchAction('index'));          // match "index" with current action name
+	\Zend\Debug\Debug::dump($this->currentRoute()->matchModule('application'));    // match "application" with current module name
+	\Zend\Debug\Debug::dump($this->currentRoute()->matchRoute('home'));            // match "home" with current route name
+*/
+?>

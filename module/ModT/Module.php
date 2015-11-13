@@ -39,9 +39,9 @@ class Module
 				while($ex = $exception->getPrevious());
 
 				$response = $event->getResponse();
-				$response->setHeaders(
-					$response->getHeaders()->addHeaderLine('Location', "/error-page")
-				);
+//				$response->setHeaders(
+//					$response->getHeaders()->addHeaderLine('Location', "/error-page")
+//				);
 				$response->setStatusCode(302);
 				$response->sendHeaders();
 				return $response;
@@ -117,6 +117,7 @@ class Module
 					$helper->setServiceManager($helperPluginManager->getServiceLocator());
 					return $helper;
 				},
+				'currentRoute' => '\ModT\Factory\View\Helper\CurrentRouteFactory',
 			)
 		);
 	}
