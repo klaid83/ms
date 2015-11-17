@@ -26,6 +26,17 @@
 	</head>
 	<body>
 		<h4><?php echo __FILE__; ?></h4>
+		<?php
+			foreach ($this->flashMessages() as $k => $messages)
+			{
+				foreach ($messages as $message)
+				{
+					echo '<div class="alert alert-' . $k . '" role="alert">';
+					echo $message;
+					echo '</div>';
+				}
+			}
+		?>
 		<div class="row">
 			<div class="col-md-2">
 				<?php

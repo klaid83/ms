@@ -118,6 +118,15 @@ class Module
 					return $helper;
 				},
 				'currentRoute' => '\ModT\Factory\View\Helper\CurrentRouteFactory',
+				'flashMessages' => function ($sm) {
+					$flashmessenger = $sm->getServiceLocator()
+						->get('ControllerPluginManager')
+						->get('flashmessenger');
+
+					$messages = new View\Helper\FlashMessages();
+					$messages->setFlashMessenger($flashmessenger);
+					return $messages;
+				},
 			)
 		);
 	}

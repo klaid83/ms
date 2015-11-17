@@ -28,6 +28,17 @@ class IndexController extends AbstractActionController
 //		    ->getRepository('Mod1\Entity\Country')
 //		    ->findAll();
 
+//	    $this->flashMessenger()->addMessage('Message.');
+//	    $this->flashMessenger()->addMessage('Message.');
+//	    $this->flashMessenger()->addErrorMessage('ErrorMessage.');
+//	    $this->flashMessenger()->addErrorMessage('ErrorMessage.');
+//	    $this->flashMessenger()->addInfoMessage('InfoMessage.');
+//	    $this->flashMessenger()->addInfoMessage('InfoMessage.');
+//	    $this->flashMessenger()->addSuccessMessage('SuccessMessage.');
+//	    $this->flashMessenger()->addSuccessMessage('SuccessMessage.');
+//	    $this->flashMessenger()->addWarningMessage('WarningMessage.');
+//	    $this->flashMessenger()->addWarningMessage('WarningMessage.');
+
         return $view_model->setVariables(
 	        array(
 //		        'countries' => $countries
